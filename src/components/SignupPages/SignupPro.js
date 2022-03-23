@@ -33,7 +33,48 @@ export default function SignupPro() {
                                 <span className="details">Address</span>
                                 <input type="text" placeholder="Enter your Address" required />
                             </div>
+                            <div className="input-box">
+                                <span className="details">City</span>
+                                <input type="text" placeholder="Enter your Address" required />
+                            </div>
+                            <div className="input-box">
+                                <span className="details">State</span>
+                                <input type="text" placeholder="Enter your Address" required />
+                            </div>
+                            
 
+                        </div>
+                        <div className="pro-details">
+                            <input type="radio" name="professional" id="dot-1" />
+                            <input type="radio" name="professional" id="dot-2" />
+                            <input type="radio" name="professional" id="dot-3" />
+                            <input type="radio" name="professional" id="dot-4" />
+                            <input type="radio" name="professional" id="dot-5" />
+                            {/* <input type="radio" name="gender" id="dot-6" /> */}
+
+                            <span className="pro-title">Select Professional</span>
+                            <div className="category">
+                                <label for="dot-1">
+                                    <span className="dot one"></span>
+                                    <span className="professional">Electrican</span>
+                                </label>
+                                <label for="dot-2">
+                                    <span className="dot two"></span>
+                                    <span className="professional">Carpenter</span>
+                                </label>
+                                <label for="dot-3">
+                                    <span className="dot three"></span>
+                                    <span className="professional">Plumber</span>
+                                </label>
+                                <label for="dot-4">
+                                    <span className="dot four"></span>
+                                    <span className="professional">Maids</span>
+                                </label>
+                                <label for="dot-5">
+                                    <span className="dot five"></span>
+                                    <span className="professional">Painter</span>
+                                </label>
+                            </div>
                         </div>
                         <div className="gender-details">
                             <input type="radio" name="gender" id="dot-1" />
@@ -57,6 +98,8 @@ export default function SignupPro() {
                         </div>
                         <div className="documents">
                             <p className="details">Upload Documents for verification</p>
+                            <input type="file" id="myFile" name="filename" required />
+                            <p className="details">Add Profile Picture</p>
                             <input type="file" id="myFile" name="filename" required />
                         </div>
                         <div className="button">
