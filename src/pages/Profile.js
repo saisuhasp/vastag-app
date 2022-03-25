@@ -1,7 +1,11 @@
 import React from "react";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 export default function SignupCus() {
     return (
+        <>
+        <Navbar />
         <div className="page">
             <div className="container">
                 <div className="title">Profile</div>
@@ -10,7 +14,7 @@ export default function SignupCus() {
 
                         <div className="info-box">
                             <p className="info">Profile Picture</p>
-                            <img src={require('./download.png')} className="profile-pic" />
+                            <img src={require('../images/download.png')} className="profile-pic" />
                         </div>
                         <div className="info-box">
                             <p className="info">Full Name : </p>
@@ -38,9 +42,9 @@ export default function SignupCus() {
                             <p className="info">State: </p>
                             <p className="info-details">Karnataka</p>
                         </div>
-                        <div className="button">
+                        {/* <div className="button">
                             <button>Edit Profile</button>
-                        </div>
+                        </div> */}
                     </div>
 
 
@@ -48,5 +52,8 @@ export default function SignupCus() {
                 </div>
             </div>
         </div>
+        <Footer />
+        </>
+        
     )
 }

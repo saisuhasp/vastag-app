@@ -99,7 +99,10 @@ export default function SignupPro() {
                         <div className="documents">
                             <p className="details">Upload Documents for verification</p>
                             <input type="file" id="myFile" name="filename" required />
-                            <p className="details">Add Profile Picture</p>
+                            
+                        </div>
+                        <div className="documents">
+                        <p className="details">Add Profile Picture</p>
                             <input type="file" id="myFile" name="filename" required />
                         </div>
                         <div className="button">

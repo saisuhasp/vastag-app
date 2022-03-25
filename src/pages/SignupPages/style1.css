@@ -14,7 +14,7 @@
   background: #423F3E;
 }
 
-.container{
+.container {
   max-width: 700px;
   width: 100%;
   background-color: #fff;
@@ -37,6 +37,10 @@
   border-radius: 5px;
   background: #423F3E
 }
+
+/* form{
+  width: 100%;
+} */
 .content form .user-details{
   display: flex;
   flex-wrap: wrap;
@@ -183,4 +187,7 @@ form .user-details .input-box{
 }
 .user-information .button button:hover {
   background: #423F3E;
+}
+.documents{
+  margin: 20px;
 }

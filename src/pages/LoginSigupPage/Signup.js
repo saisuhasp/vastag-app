@@ -9,13 +9,13 @@ export default function Signup() {
             <div className="title">Signup</div>
 
             <div className="sign-up-btn-div">
-                <form onClick={()=>{ navigate('/signup-pro')}}>
+                <form onSubmit={()=>{ navigate('/signup-pro')}}>
                     <div className="button input-box">
                         <input type="submit" value="I am a Professional" />
                     </div>
                 </form>
 
-                <form onClick={()=>{ navigate('/signup-customer')}}>
+                <form onSubmit={()=>{ navigate('/signup-customer')}}>
                     <div className="button input-box">
                         <input type="submit" value="I am a Customer" />
                     </div>

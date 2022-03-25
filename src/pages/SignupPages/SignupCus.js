@@ -6,7 +6,7 @@ export default function SignupCus() {
             <div className="container">
                 <div className="title">Registration for Customers</div>
                 <div className="content">
-                    <form action="#">
+                    <form action="#" className="form-reg">
                         <div className="user-details">
                             <div className="input-box">
                                 <span className="details">Full Name</span>

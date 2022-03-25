@@ -1,10 +1,12 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Login(){
+    let navigate = useNavigate();
     return(
         <div className="login-form">
         <div className="title">Login</div>
-        <form action="#">
+        <form onSubmit={()=>{ navigate('/home')}}>
             <div className="input-boxes">
                 <div className="input-box">
                     <i className="fas fa-envelope"></i>

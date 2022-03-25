@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+
+
+*{
+  font-family: 'Poppins', sans-serif;
+}
+.contact  {
+  height: 100%;
+  flex: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* margin-top: 30px; */
+  margin: 30px;
+  align-items: center;
+
+
+}
+
+.contact .rightSide h1 {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  font-weight: 10;
+  font-size: 50px;
+  margin-left: 30px;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  width: 75%;
+  height: auto;
+  padding: 30px;
+}
+
+.contact-form input {
+  height: 40px;
+  width: 80%;
+  border: none;
+  border-bottom: 1px solid #121619;
+  color: black;
+}
+
+.contact-form textarea {
+  margin-top: 15px;
+  height: 70px;
+  width: 80%;
+  border: none;
+  border-bottom: 1px solid #121619;
+  color: black;
+}
+input::placeholder,
+textarea::placeholder {
+  font-weight: bold;
+  color: black;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.contact-form input:focus,
+textarea:focus {
+  outline: none;
+}
+
+.contact-form label {
+  margin-top: 15px;
+  color: grey;
+}
+
+.contact-form button {
+  margin-top: 40px;
+  width: 140px;
+  height: 40px;
+  border: none;
+  background-color: #121619;
+  color: whitesmoke;
+  font-size: 15px;
+  cursor: pointer;
+  border-radius: 9px;
+  transition: all 0.2s ease;
+
+}
+.contact-form button:hover{
+  background: #423F3E;
+}
