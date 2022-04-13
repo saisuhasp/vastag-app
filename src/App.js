@@ -9,6 +9,7 @@ import Home from "./pages/Home";
 
 import Contact from "./pages/Contact";
 import Landing from "./pages/Landing";
+import AboutPro from "./pages/AboutPro"
 
 export default function App() {
     return (
@@ -21,6 +22,8 @@ export default function App() {
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/home" exact element={<Home />} />
                 <Route path="/contact" exact element={<Contact />} />
+                <Route path="/about-pro" exact element={<AboutPro />} />
+
             </Routes>
         </Router>
     )
