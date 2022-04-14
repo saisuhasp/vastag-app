@@ -4,7 +4,7 @@ import LoginSignup from "./pages/LoginSigupPage/LoginSignup";
 import SignupPro from "./pages/SignupPages/SignupPro";
 import SignupCus from "./pages/SignupPages/SignupCus";
 import Profile from "./pages/Profile";
-
+import Logout from "./pages/Logout"
 import Home from "./pages/Home";
 
 import Contact from "./pages/Contact";
@@ -23,6 +23,8 @@ export default function App() {
                 <Route path="/home" exact element={<Home />} />
                 <Route path="/contact" exact element={<Contact />} />
                 <Route path="/about-pro" exact element={<AboutPro />} />
+                <Route path='/log-out' element={<Logout />} />
+
 
             </Routes>
         </Router>

@@ -1,0 +1,32 @@
+.logout-page{
+    min-height: 100vh;
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
+    background: #423F3E;
+    padding: 30px;
+}
+.logout-content{
+    color: white;
+    text-align: center;
+
+    
+}
+.logout-heading{
+    margin:  50px;
+    
+}
+.logout-login {
+    display: inline;
+    
+}
+.logout-content a{
+    color: white;
+  text-decoration: none;
+  font-size: 1.17em;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}

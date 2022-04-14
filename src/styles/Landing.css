@@ -24,16 +24,10 @@
     height: 40px;
     /* border-style: none; */
     border-radius: 9px; 
-}
-.nav-btn:hover{
-    border-width: 0;
-    border-style: none;
-    background-color: white;
-    color: black;
-    font-size: 20px;
-    border-radius: 9px;
+  transition: all 0.2s ease;
 
 }
+
 
 
 
@@ -67,4 +61,11 @@
     border-radius: 6px;
     margin-top: 20px;
     width: 300px;
+  transition: all 0.2s ease;
+
+}
+
+.end button:hover{
+    background: #423F3E;   
+
 }
