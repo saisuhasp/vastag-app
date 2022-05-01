@@ -12,9 +12,9 @@ function Home() {
       <div className="home" style={{ backgroundImage: `url(${BannerImage})` , width:"50%" , float:"left"}}>
       <div className="headerContainer">
         <h1> Your Location </h1>
-        <input type="text" id="fname" name="fname"  className="input-boxes"/><br />
+        <input type="text" id="fname" name="fname"  className="input-boxes" required/>
         <h1> Your Service</h1>
-        <input type="text" id="fname" name="fname" className="input-boxes"/><br /><br />
+        <input type="text" id="fname" name="fname" className="input-boxes" required/><br /><br />
 
         <Link to="/search">
           <button> SERACH </button>

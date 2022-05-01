@@ -10,7 +10,7 @@ import Home from "./pages/Home";
 import Contact from "./pages/Contact";
 import Landing from "./pages/Landing";
 import AboutPro from "./pages/AboutPro"
-
+import Search from "./pages/Search";
 export default function App() {
     return (
         <Router>
@@ -24,6 +24,8 @@ export default function App() {
                 <Route path="/contact" exact element={<Contact />} />
                 <Route path="/about-pro" exact element={<AboutPro />} />
                 <Route path='/log-out' element={<Logout />} />
+                <Route path="/search" exact element={<Search />} />
+
 
 
             </Routes>
