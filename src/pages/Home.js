@@ -2,8 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import BannerImage from "../images/background.jpg";
 import "../styles/Home.css";
-import Navbar from "../components/Navbar";
+// import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
+
 
 function Home() {
   return (

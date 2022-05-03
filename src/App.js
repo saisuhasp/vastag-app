@@ -6,11 +6,11 @@ import SignupCus from "./pages/SignupPages/SignupCus";
 import Profile from "./pages/Profile";
 import Logout from "./pages/Logout"
 import Home from "./pages/Home";
-
 import Contact from "./pages/Contact";
 import Landing from "./pages/Landing";
 import AboutPro from "./pages/AboutPro"
 import Search from "./pages/Search";
+// import NavBar2 from "./components/NavBar2";
 export default function App() {
     return (
         <Router>

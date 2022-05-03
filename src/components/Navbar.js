@@ -1,36 +1,84 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import ReorderIcon from "@material-ui/icons/Reorder";
-import "../styles/Navbar.css";
+import React, { useState } from 'react';
+// import { Button } from './Button';
+import { Link } from 'react-router-dom';
+import './Navbar.css';
+import Dropdown from './Dropdown';
 
 function Navbar() {
-  const [openLinks, setOpenLinks] = useState(false);
+  const [click, setClick] = useState(false);
+  const [dropdown, setDropdown] = useState(false);
 
-  const toggleNavbar = () => {
-    setOpenLinks(!openLinks);
+  const handleClick = () => setClick(!click);
+  const closeMobileMenu = () => setClick(false);
+
+  const onMouseEnter = () => {
+    if (window.innerWidth < 960) {
+      setDropdown(false);
+    } else {
+      setDropdown(true);
+    }
   };
+
+  const onMouseLeave = () => {
+    if (window.innerWidth < 960) {
+      setDropdown(false);
+    } else {
+      setDropdown(false);
+    }
+  };
+
   return (
-    <div className="navbar">
-      <div className="leftSide" id={openLinks ? "open" : "close"}>
-        {/* <img src={Logo} /> */}
-        <h2 className="logo">VASTAG</h2>
-        <div className="hiddenLinks">
-          <Link to="/home"> Home </Link>
-          <Link to="/contact"> Contact </Link>
-          <Link to="/profile"> Profile </Link>
-          <Link to="/log-out"> Log Out </Link>
+    <>
+      <nav className='navbar2'>
+         <Link to='/home' className='navbar-logo' onClick={closeMobileMenu}>
+          VASTAG
+          <i className='fab fa-firstdraft' />
+        </Link>
+        <div className='menu-icon' onClick={handleClick}>
+          <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
         </div>
-      </div>
-      <div className="rightSide">
-      <Link to="/home"> Home </Link>
-          <Link to="/contact"> Contact </Link>
-          <Link to="/profile"> Profile </Link>
-          <Link to="/log-out"> Log Out </Link>
-        <button onClick={toggleNavbar}>
-          <ReorderIcon />
-        </button>
-      </div>
-    </div>
+        <ul className={click ? 'nav-menu active' : 'nav-menu'}>
+          <li className='nav-item'>
+            <Link to='/home' className='nav-links' onClick={closeMobileMenu}>
+              Home
+            </Link>
+          </li>
+          <li
+            className='nav-item'
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
+          >
+            <Link
+              to='/profile'
+              className='nav-links'
+              onClick={closeMobileMenu}
+            >
+              Profile <i className='fas fa-caret-down' />
+            </Link>
+            {dropdown && <Dropdown />}
+          </li>
+          <li className='nav-item'>
+            <Link
+              to='/contact'
+              className='nav-links'
+              onClick={closeMobileMenu}
+            >
+              Contact
+            </Link>
+          </li>
+          <li className='nav-item'>
+            <Link
+              to='/log-out'
+              className='nav-links'
+              onClick={closeMobileMenu}
+            >
+              Log Out
+            </Link>
+          </li>
+        </ul> 
+        {/* <Button /> */}
+      </nav>
+    </>
   );
 }
 

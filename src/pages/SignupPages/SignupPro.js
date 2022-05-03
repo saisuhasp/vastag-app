@@ -54,23 +54,23 @@ export default function SignupPro() {
 
                             <span className="pro-title">Select Professional</span>
                             <div className="category">
-                                <label for="dot-1">
+                                <label htmlFor="dot-1">
                                     <span className="dot one"></span>
                                     <span className="professional">Electrican</span>
                                 </label>
-                                <label for="dot-2">
+                                <label htmlFor="dot-2">
                                     <span className="dot two"></span>
                                     <span className="professional">Carpenter</span>
                                 </label>
-                                <label for="dot-3">
+                                <label htmlFor="dot-3">
                                     <span className="dot three"></span>
                                     <span className="professional">Plumber</span>
                                 </label>
-                                <label for="dot-4">
+                                <label htmlFor="dot-4">
                                     <span className="dot four"></span>
                                     <span className="professional">Maids</span>
                                 </label>
-                                <label for="dot-5">
+                                <label htmlFor="dot-5">
                                     <span className="dot five"></span>
                                     <span className="professional">Painter</span>
                                 </label>
@@ -82,15 +82,15 @@ export default function SignupPro() {
                             <input type="radio" name="gender" id="dot-3" />
                             <span className="gender-title">Gender</span>
                             <div className="category">
-                                <label for="dot-1">
+                                <label htmlFor="dot-1">
                                     <span className="dot one"></span>
                                     <span className="gender">Male</span>
                                 </label>
-                                <label for="dot-2">
+                                <label htmlFor="dot-2">
                                     <span className="dot two"></span>
                                     <span className="gender">Female</span>
                                 </label>
-                                <label for="dot-3">
+                                <label htmlFor="dot-3">
                                     <span className="dot three"></span>
                                     <span className="gender">Prefer not to say</span>
                                 </label>
