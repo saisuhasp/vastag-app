@@ -2,7 +2,8 @@
     display: flex;
     margin: 2%;
     align-items: center;
-    justify-content: space-around;
+    /* justify-content: space-around; */
+    flex-wrap: wrap;
 }
 
 .main-title {
@@ -15,7 +16,7 @@
     display: inline-block;
     box-shadow: 1px 1px 5px black;
     border-radius: 5px;
-    margin: 2%;
+    margin: 20px;
     text-decoration: none;
     color: black;
 }

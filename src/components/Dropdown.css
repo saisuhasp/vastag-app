@@ -5,6 +5,7 @@
   top: 80px;
   list-style: none;
   text-align: start;
+  z-index: 9000000;
 }
 
 .dropdown-menu li {
@@ -14,6 +15,7 @@
 
 .dropdown-menu li:hover {
   background: #5cabff;
+  
 }
 
 .dropdown-menu.clicked {

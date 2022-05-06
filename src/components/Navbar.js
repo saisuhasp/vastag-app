@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-// import { Button } from './Button';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
 import Dropdown from './Dropdown';
@@ -29,7 +28,7 @@ function Navbar() {
 
   return (
     <>
-      <nav className='navbar2'>
+      <nav className='navbar'>
          <Link to='/home' className='navbar-logo' onClick={closeMobileMenu}>
           VASTAG
           <i className='fab fa-firstdraft' />
@@ -43,19 +42,23 @@ function Navbar() {
               Home
             </Link>
           </li>
-          <li
-            className='nav-item'
-            onMouseEnter={onMouseEnter}
-            onMouseLeave={onMouseLeave}
-          >
+          <li className='nav-item'>
             <Link
               to='/profile'
               className='nav-links'
               onClick={closeMobileMenu}
             >
-              Profile <i className='fas fa-caret-down' />
+              Profile
             </Link>
-            {dropdown && <Dropdown />}
+          </li>
+          <li className='nav-item'>
+            <Link
+              to='/reviews'
+              className='nav-links'
+              onClick={closeMobileMenu}
+            >
+              Reviews
+            </Link>
           </li>
           <li className='nav-item'>
             <Link

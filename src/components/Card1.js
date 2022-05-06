@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../styles/Search.css";
 
-const Card = () => (
+const Card1 = () => (
     <Link to="/about-pro">
     <div className="card">
 
@@ -22,4 +22,4 @@ const Card = () => (
     </Link>
 )
 
-export default Card
+export default Card1

@@ -7,7 +7,12 @@ function Landing() {
     return (
         <div>
             <div className="nav-bar">
-                <h2>VASTAG</h2>
+            <div className="nav-logo">
+            <h2>VASTAG</h2>
+            <i className='fab fa-firstdraft' />
+            </div>
+                
+
                 <Link to="/login-signup">
                     <button className="nav-btn">Login/Signup</button>
                 </Link>
