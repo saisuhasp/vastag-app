@@ -1,6 +1,64 @@
-import React from "react";
+import React, {useState} from "react";
 import "./style1.css"
-export default function SignupPro() {
+import Web3 from "web3";
+import { ProABI } from "./ProABi";
+
+const web3 = new Web3(new Web3.providers.HttpProvider("HTTP://127.0.0.1:7545"));
+web3.eth.defaultAccount = web3.eth.accounts[0];
+
+const RemixContract = new web3.eth.Contract(
+  ProABI,
+  "0x5D73B4a00Ef7429bcBC0E682E7A3BB606a5249ab"
+);
+
+function SignupPro() {
+  const [professional, setProfesssional] = useState([]);
+  const [name,setName]=useState('')
+  const [email,setEmail]=useState('')
+  const [phoneNo,setPhoneNo]=useState('')
+  const [gender,setGender]=useState('')
+  const [address,setAddres]=useState('')
+  const [city,setCity]=useState('')
+  const [state,setState]=useState('')
+  const [profession,setProfession]=useState('')
+
+const [data,setstr]=useState()
+
+
+    const setData= async e=>{
+    
+      e.preventDefault();
+
+      const accounts = await window.ethereum.enable();
+    const account = accounts[0];
+   
+    var lst=[
+      ...professional,{name,email,phoneNo,gender,address,city,state,profession}
+    ];
+    let str=""
+    for(let i in lst[0]){
+      let v=lst[0]
+      str=str+String(i)+"_"+String(v[i])+"_"
+    }   
+    const gas = await RemixContract.methods.addData(str).estimateGas();
+    
+    const result = await RemixContract.methods
+      .addData(str)
+      .send({ from: account, gas });
+    console.log(result);
+  }
+
+
+  const [dataset,setDatatobody]=useState()
+  const getData = async e => {
+    RemixContract.methods
+      .getMessage()
+      .call()
+      .then((res)=>{setDatatobody(res)});
+    console.log(dataset)
+  };
+
+
     return (
         <div className="page">
             <div className="container">
@@ -10,16 +68,16 @@ export default function SignupPro() {
                         <div className="user-details">
                             <div className="input-box">
                                 <span className="details">Full Name</span>
-                                <input type="text" placeholder="Enter your name" required />
+                                <input type="text" placeholder="Enter your name" required value={name} onChange={(e)=>setName(e.target.value)}/>
                             </div>
 
                             <div className="input-box">
                                 <span className="details">Email</span>
-                                <input type="email" placeholder="Enter your email" required />
+                                <input type="email" placeholder="Enter your email" required value={email} onChange={(e)=>setEmail(e.target.value)} />
                             </div>
                             <div className="input-box">
                                 <span className="details">Phone Number</span>
-                                <input type="text" placeholder="Enter your number" required />
+                                <input type="text" placeholder="Enter your number" required value={phoneNo} onChange={(e)=>setPhoneNo(e.target.value)}/>
                             </div>
                             <div className="input-box">
                                 <span className="details">Password</span>
@@ -31,86 +89,41 @@ export default function SignupPro() {
                             </div>
                             <div className="input-box">
                                 <span className="details">Address</span>
-                                <input type="text" placeholder="Enter your Address" required />
+                                <input type="text" placeholder="Enter your Address" required value={address} onChange={(e)=>setAddres(e.target.value)}/>
                             </div>
                             <div className="input-box">
                                 <span className="details">City</span>
-                                <input type="text" placeholder="Enter your Address" required />
+                                <input type="text" placeholder="Enter your Address" required value={city} onChange={(e)=>setCity(e.target.value)}/>
                             </div>
                             <div className="input-box">
                                 <span className="details">State</span>
-                                <input type="text" placeholder="Enter your Address" required />
+                                <input type="text" placeholder="Enter your Address" required value={state} onChange={(e)=>setState(e.target.value)}/>
+                            </div>
+                            <div className="input-box">
+                                <span className="details">Profession</span>
+                                <input type="text" placeholder="Enter your Profession" required alue={profession} onChange={(e)=>setProfession(e.target.value)}/>
+                            </div>
+                            <div className="input-box">
+                                <span className="details">Gender</span>
+                                <input type="text" placeholder="Enter your Gender" required value={gender} onChange={e=>setGender(e.target.value)}/>
                             </div>
                             
 
                         </div>
-                        <div className="pro-details">
-                            <input type="radio" name="professional" id="dot-1" />
-                            <input type="radio" name="professional" id="dot-2" />
-                            <input type="radio" name="professional" id="dot-3" />
-                            <input type="radio" name="professional" id="dot-4" />
-                            <input type="radio" name="professional" id="dot-5" />
-                            {/* <input type="radio" name="gender" id="dot-6" /> */}
-
-                            <span className="pro-title">Select Professional</span>
-                            <div className="category">
-                                <label htmlFor="dot-1">
-                                    <span className="dot one"></span>
-                                    <span className="professional">Electrican</span>
-                                </label>
-                                <label htmlFor="dot-2">
-                                    <span className="dot two"></span>
-                                    <span className="professional">Carpenter</span>
-                                </label>
-                                <label htmlFor="dot-3">
-                                    <span className="dot three"></span>
-                                    <span className="professional">Plumber</span>
-                                </label>
-                                <label htmlFor="dot-4">
-                                    <span className="dot four"></span>
-                                    <span className="professional">Maids</span>
-                                </label>
-                                <label htmlFor="dot-5">
-                                    <span className="dot five"></span>
-                                    <span className="professional">Painter</span>
-                                </label>
-                            </div>
-                        </div>
-                        <div className="gender-details">
-                            <input type="radio" name="gender" id="dot-1" />
-                            <input type="radio" name="gender" id="dot-2" />
-                            <input type="radio" name="gender" id="dot-3" />
-                            <span className="gender-title">Gender</span>
-                            <div className="category">
-                                <label htmlFor="dot-1">
-                                    <span className="dot one"></span>
-                                    <span className="gender">Male</span>
-                                </label>
-                                <label htmlFor="dot-2">
-                                    <span className="dot two"></span>
-                                    <span className="gender">Female</span>
-                                </label>
-                                <label htmlFor="dot-3">
-                                    <span className="dot three"></span>
-                                    <span className="gender">Prefer not to say</span>
-                                </label>
-                            </div>
-                        </div>
-                        <div className="documents">
-                            <p className="details">Upload Documents for verification</p>
-                            <input type="file" id="myFile" name="filename" required />
-                            
-                        </div>
-                        <div className="documents">
-                        <p className="details">Add Profile Picture</p>
-                            <input type="file" id="myFile" name="filename" required />
-                        </div>
+                        
+                        
+                    
                         <div className="button">
-                            <input type="submit" value="Register" />
+                            <input type="submit" value="Register" onClick={setData} />
                         </div>
+                       
+                        
                     </form>
                 </div>
             </div>
         </div>
     )
 }
+
+
+export default SignupPro;
