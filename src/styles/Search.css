@@ -11,7 +11,7 @@
     margin-top: 30px;
 }
 
-.card {
+.search-card {
     width: 180px;
     display: inline-block;
     box-shadow: 1px 1px 5px black;
@@ -19,6 +19,7 @@
     margin: 20px;
     text-decoration: none;
     color: black;
+    font-size: medium;
 }
 
 .image-card img {

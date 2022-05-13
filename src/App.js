@@ -12,6 +12,8 @@ import Landing from "./pages/Landing";
 import AboutPro from "./pages/AboutPro"
 import Search from "./pages/Search";
 import ReviewsPage from "./pages/ReviewsPage";
+import AdminPage from "./pages/AdminPage";
+
 // import NavBar2 from "./components/NavBar2";
 export default function App() {
     return (
@@ -28,6 +30,7 @@ export default function App() {
                 <Route path='/log-out' element={<Logout />} />
                 <Route path="/search" exact element={<Search />} />
                 <Route path="/reviews" exact element={<ReviewsPage />} />
+                <Route path="/admin" exact element={<AdminPage />} />
 
 
 
