@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import "./style1.css"
 import Web3 from "web3";
 import { ProABI } from "./ProABi";
+import {useNavigate} from "react-router-dom"
 
 const web3 = new Web3(new Web3.providers.HttpProvider("HTTP://127.0.0.1:7545"));
 web3.eth.defaultAccount = web3.eth.accounts[0];
@@ -12,6 +13,7 @@ const RemixContract = new web3.eth.Contract(
 );
 
 function SignupPro() {
+  const navigate = useNavigate();
   const [professional, setProfesssional] = useState([]);
   const [name,setName]=useState('')
   const [email,setEmail]=useState('')
@@ -21,6 +23,8 @@ function SignupPro() {
   const [city,setCity]=useState('')
   const [state,setState]=useState('')
   const [profession,setProfession]=useState('')
+  const [password, setPassword] = useState('')
+  const [cpassword, setCpassword] = useState('')
 
 const [data,setstr]=useState()
 
@@ -28,6 +32,35 @@ const [data,setstr]=useState()
     const setData= async e=>{
     
       e.preventDefault();
+      const res = await fetch('/signup-pro',{
+        method: "POST",
+        headers:{
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            name:name,
+             email:email, 
+             phoneNo:phoneNo , 
+             password:password,
+             cpassword:cpassword, 
+             address:address, 
+             city:city,
+            state:state,
+            profession:profession,
+            gender:gender
+        })
+    });
+    const data = await  res.json();
+
+    if(data.status === 422 || !data){
+        window.alert("Invalid Registration");
+        console.log("Invalid Registration");
+
+    }else{
+        window.alert(" Registration Successful");
+        console.log(" Registration Successful");
+        navigate('/login-signup');
+    }
 
       const accounts = await window.ethereum.enable();
     const account = accounts[0];
@@ -64,7 +97,7 @@ const [data,setstr]=useState()
             <div className="container">
                 <div className="title">Registration for Professionals</div>
                 <div className="content">
-                    <form action="#">
+                    <form action="POST">
                         <div className="user-details">
                             <div className="input-box">
                                 <span className="details">Full Name</span>
@@ -81,11 +114,11 @@ const [data,setstr]=useState()
                             </div>
                             <div className="input-box">
                                 <span className="details">Password</span>
-                                <input type="password" placeholder="Enter your password" required />
+                                <input type="password" placeholder="Enter your password" required value={password} onChange={(e) => setPassword(e.target.value)} />
                             </div>
                             <div className="input-box">
                                 <span className="details">Confirm Password</span>
-                                <input type="password" placeholder="Confirm your password" required />
+                                <input type="password" placeholder="Confirm your password" required value={cpassword} onChange={(e) => setCpassword(e.target.value)} />
                             </div>
                             <div className="input-box">
                                 <span className="details">Address</span>
@@ -93,11 +126,11 @@ const [data,setstr]=useState()
                             </div>
                             <div className="input-box">
                                 <span className="details">City</span>
-                                <input type="text" placeholder="Enter your Address" required value={city} onChange={(e)=>setCity(e.target.value)}/>
+                                <input type="text" placeholder="Enter your City" required value={city} onChange={(e)=>setCity(e.target.value)}/>
                             </div>
                             <div className="input-box">
                                 <span className="details">State</span>
-                                <input type="text" placeholder="Enter your Address" required value={state} onChange={(e)=>setState(e.target.value)}/>
+                                <input type="text" placeholder="Enter your State" required value={state} onChange={(e)=>setState(e.target.value)}/>
                             </div>
                             <div className="input-box">
                                 <span className="details">Profession</span>
