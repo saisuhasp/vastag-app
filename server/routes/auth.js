@@ -78,9 +78,9 @@ router.post('/signup-pro', async (req, res) => {
         const userExist = await Professional.findOne({ email: email });
 
         if (userExist) {
-            return res.status(422).json({ error: "Email already exist" });
+            return res.status(444).json({ error: "Email already exist" });
         }else if (password != cpassword) {
-            return res.status(422).json({ error: "password are not matching" });
+            return res.status(433).json({ error: "password are not matching" });
         }else{
             const user = new Professional({ name, email, phoneNo, password, cpassword, address, city, state, profession, gender });
         const professionalRegister = await user.save();

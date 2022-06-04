@@ -55,7 +55,16 @@ function SignupCus() {
             window.alert("Invalid Registration");
             console.log("Invalid Registration");
 
-        }else{
+        }else if(res.status === 433){
+            window.alert("Password doesnt match please check again");
+            console.log("Password doesnt match please check again");
+        }
+        else if(res.status === 444){
+            window.alert("This email is already existing !");
+            console.log("This email is already existing !");
+        }
+        
+        else{
             window.alert(" Registration Successful");
             console.log(" Registration Successful");
             navigate('/login-signup');
@@ -92,26 +101,6 @@ function SignupCus() {
     };
 
 
-    // const handleSubmit=()=> { 
-    //     const postURL = "http://localhost:5000/api/staff/" 
-    //     fetch(postURL, {
-    //         method: 'POST',
-    //         headers: {
-    //             'Accept': 'application/json',
-    //             'Content-Type': 'application/json',
-    //         },
-    //         body: JSON.stringify({ 
-    //             name: name,
-    //             email: email,
-    //             phoneNo:phoneNo,
-    //             password:password,
-    //         })
-    //     })
-    //     .then(()=>{
-
-    //         alert('You have been added to the system!');
-    //     })
-    // }
 
 
     return (

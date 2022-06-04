@@ -15,7 +15,7 @@ const RemixContract = new web3.eth.Contract(
 function SignupPro() {
   const navigate = useNavigate();
   const [professional, setProfesssional] = useState([]);
-  const [name,setName]=useState('')
+  const [name,setName]=useState("")
   const [email,setEmail]=useState('')
   const [phoneNo,setPhoneNo]=useState('')
   const [gender,setGender]=useState('')
@@ -52,11 +52,19 @@ const [data,setstr]=useState()
     });
     const data = await  res.json();
 
-    if(data.status === 422 || !data){
+    if(res.status === 422 || !data){
         window.alert("Invalid Registration");
         console.log("Invalid Registration");
 
-    }else{
+    }else if(res.status === 433){
+        window.alert("Password doesnt match please check again");
+        console.log("Password doesnt match please check again");
+    }
+    else if(res.status === 444){
+        window.alert("This email is already existing !");
+        console.log("This email is already existing !");
+    }
+    else{
         window.alert(" Registration Successful");
         console.log(" Registration Successful");
         navigate('/login-signup');
