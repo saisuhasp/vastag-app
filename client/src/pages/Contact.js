@@ -1,8 +1,71 @@
-import React from "react";
+import React,{useEffect,useState} from "react";
 import "../styles/Contact.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import {useNavigate} from "react-router-dom";
+
 function Contact() {
+  const navigate = useNavigate();
+  const [userData,setUserData] = useState({
+    name :"",
+    email : "",
+    message:""
+  });
+
+  const callContactPage = async()=>{
+    try {
+      const res = await fetch('/contact',{
+        method:"GET",
+        headers:{
+           "Content-Type":"application/json",
+
+        }
+      });
+      const data  = await res.json();
+      setUserData({...userData, name:data.name,email:data.email});
+
+      if(!res.status === 200){
+        const error = new Error(res.error)
+        throw error;
+      }
+    } catch (error) {
+      console.log(error);
+      navigate("/login-signup");
+    }
+  }
+
+  useEffect(() => {
+    callContactPage();
+    
+  },[]);
+  const handleInputs = (e)=>{
+    const name  = e.target.name;
+    const value  = e.target.value;
+    setUserData({...userData,[name]:value})
+    
+  }
+  const contactForm =async(e)=>{
+    e.preventDefault();
+    const {name,email,message} = userData;
+    const res = await fetch('/contact',{
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json",
+      },
+      body:JSON.stringify({
+        name:name,
+        email:email,
+        message:message
+      })
+    });
+    const  data  =await res.json();
+    if(!data){
+      console.log("message not sent");
+    }else{
+      alert("Message Sent");
+      setUserData({...userData,message:""})
+    }
+  }
   return (
     <>
     <Navbar />
@@ -11,17 +74,21 @@ function Contact() {
 
       <form className ="contact-form" method="POST">
         <label htmlFor="name">Full Name</label>
-        <input name="name" placeholder="Enter full name..." type="text" />
+        <input name="name" placeholder="Enter full name..." type="text"  defaultValue={userData.name}
+          
+        />
         <label htmlFor="email">Email</label>
-        <input name="email" placeholder="Enter email..." type="email" />
+        <input name="email" placeholder="Enter email..." type="email" defaultValue={userData.email}
+           />
         <label htmlFor="message">Message</label>
         <textarea
           rows="6"
           placeholder="Enter message..."
           name="message"
+          onChange={handleInputs}
           required
         ></textarea>
-        <button type="submit"> Send Message</button>
+        <button type="submit" onClick={contactForm}> Send Message</button>
       </form>
     </div>
     <Footer />

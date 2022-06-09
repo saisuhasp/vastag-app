@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import { Link } from "react-router-dom";
 import BannerImage from "../images/background.jpg";
 import "../styles/Home.css";
@@ -7,11 +7,39 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { Form,Button } from "react-bootstrap";
-
+import {useNavigate} from "react-router-dom";
 
 
 
 function Home() {
+    const navigate = useNavigate();
+  const callHomePage = async()=>{
+    try {
+      const res = await fetch('/home',{
+        method:"GET",
+        headers:{
+           Accept:"application/json",
+           "Content-Type":"application/json",
+
+        },
+        credentials:"include"
+      });
+      const data  = await res.json();
+      console.log(data);
+      if(!res.status === 200){
+        const error = new Error(res.error)
+        throw error;
+      }
+    } catch (error) {
+      console.log(error);
+      navigate("/login-signup");
+    }
+  }
+
+  useEffect(() => {
+    callHomePage();
+    
+  }, []);
   return (
     <div>
       <Navbar />

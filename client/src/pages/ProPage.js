@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState ,useEffect} from 'react';
+import { Link , useNavigate} from 'react-router-dom';
 import '../styles/AdminPage.css';
 import {Tabs,Tab} from 'react-bootstrap'
 import CusNotifiaction from '../components/CusNotifiaction';
@@ -12,6 +12,34 @@ function AdminPage() {
 
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
+  const navigate = useNavigate();
+  const callProPage = async()=>{
+    try {
+      const res = await fetch('/pro',{
+        method:"GET",
+        headers:{
+           Accept:"application/json",
+           "Content-Type":"application/json",
+
+        },
+        credentials:"include"
+      });
+      const data  = await res.json();
+      console.log(data);
+      if(!res.status === 200){
+        const error = new Error(res.error)
+        throw error;
+      }
+    } catch (error) {
+      console.log(error);
+      navigate("/login-signup");
+    }
+  }
+
+  useEffect(() => {
+    callProPage();
+    
+  }, []);
 
 
 

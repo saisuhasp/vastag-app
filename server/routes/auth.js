@@ -2,7 +2,8 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
-
+const authenticate = require("../middleWare/authenticateCus")
+const authenticatePro = require("../middleWare/authenticatePro")
 require('../db/conn');
 
 const Customer = require("../models/customer.model");
@@ -122,8 +123,8 @@ router.post('/login-signup', async (req, res) => {
                 res.status(400).json({ error: "Invalid user credentials" });
             } else {
                 let isMatch = await bcrypt.compare(password, userLogin.password);
-                 token = await userLogin.generateAuthToken();
-                 res.cookie("jwtToken",token,{
+                 token = await userLogin.generateProAuthToken();
+                 res.cookie("jwtProToken",token,{
                     expires:new Date(Date.now() + 25892000000),
                     httpOnly:true
                 } );
@@ -139,9 +140,9 @@ router.post('/login-signup', async (req, res) => {
         }
         else {
             let isMatch = await bcrypt.compare(password, userLogin.password);
-            token = await userLogin.generateAuthToken();
-            console.log(token)
-            res.cookie("jwtToken",token,{
+            token = await userLogin.generateCusAuthToken();
+            // console.log(token)
+            res.cookie("jwtCusToken",token,{
                 expires:new Date(Date.now() + 25892000000),
                 httpOnly:true
             } );
@@ -160,7 +161,45 @@ router.post('/login-signup', async (req, res) => {
     }
 })
 
-
+router.get('/home',authenticate,(req,res)=>{
+    res.send(req.rootUser);
+});
+router.get('/profile',authenticate,(req,res)=>{
+    res.send(req.rootUser);
+});
+router.get('/reviews',authenticate,(req,res)=>{
+    res.send(req.rootUser);
+});
+router.post('/contact',authenticate,async(req,res)=>{
+    try{
+        const {name,email,message}=req.body;
+        if(!name||!email||!message){
+            console.log(("error in contact form"));
+            return res.json({error:"please fill the contact form "});
+        }
+        const userContact = await Customer.findOne({_id:req.userID});
+        if(userContact){
+            const userMessage = await userContact.addMessage(name,email,message);
+            await userContact.save();
+            res.status(201).json({message:"user message added"})
+        
+        }
+    }catch(e){
+        console.log(e);
+    }
+});
+router.get('/contact',authenticate,(req,res)=>{
+    res.send(req.rootUser);
+});
+router.get('/search',authenticate,(req,res)=>{
+    res.send(req.rootUser);
+});
+router.get('/about-pro',authenticate,(req,res)=>{
+    res.send(req.rootUser);
+});
+router.get('/pro',authenticatePro,(req,res)=>{
+    res.send(req.rootUser);
+});
 
 
 module.exports = router;
