@@ -201,5 +201,11 @@ router.get('/pro',authenticatePro,(req,res)=>{
     res.send(req.rootUser);
 });
 
+router.get('/log-out',(req,res)=>{
+    res.clearCookie('jwtCusToken')
+    res.clearCookie('jwtProToken')
+
+    res.status(200).send('user logout')
+});
 
 module.exports = router;

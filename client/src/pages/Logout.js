@@ -1,9 +1,29 @@
-import React from "react";
+import React,{useEffect} from "react";
 import "../styles/Logout.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 function Logout(){
+const navigate = useNavigate()
+    useEffect(() => {
+        fetch('/log-out',{
+        method:"GET",
+        headers:{
+           Accept:"application/json",
+           "Content-Type":"application/json",
+
+        },
+        credentials:"include"
+      }).then((res)=>{
+            navigate("/log-out",{replace:true});
+            if(res.status != 200){
+                const error = new Error(res.error)
+                throw error;
+            }
+      }).catch((err)=>{
+        console.log(err)
+      });
+    },[]);
     return(
         <div className="logout-page" >
             <div className="logout-content">
