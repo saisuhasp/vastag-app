@@ -48,16 +48,13 @@ const cusSchema = new mongoose.Schema(
         messages: [{
             name: {
                 type: String,
-                required: true
+                
             },
             email: {
                 type: String,
-                required: true,
-                unique: true
             },
             message: {
                 type: String,
-                required: true,
             }
         }
 

@@ -1,6 +1,5 @@
 const jwt  = require("jsonwebtoken");
-const Customer = require("../models/customer.model");
-const Professional = require("../models/pro.model");
+const Customer = require("../models/customerModel");
 
 
 const authenticateCus = async(req,res,next)=>{

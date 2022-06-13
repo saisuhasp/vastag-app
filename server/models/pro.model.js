@@ -46,6 +46,33 @@ const proSchema = new mongoose.Schema(
             type: String,
             required: true
         },
+        date: {
+            type: Date,
+            default: Date.now
+        },
+        tiers:{
+            tier1_name: {
+                type: String,
+            },
+            tier1_price: {
+                type: String,
+            },tier1_details: {
+                type: String,
+            },tier2_name: {
+                type: String,
+            },tier2_price: {
+                type: String,
+            },tier2_details: {
+                type: String,
+            },tier3_name: {
+                type: String,
+            },tier3_price: {
+                type: String,
+            },tier3_details: {
+                type: String,
+            },
+
+        },
         tokens: [{
             token: {
                 type: String,
@@ -78,6 +105,16 @@ proSchema.methods.generateProAuthToken = async function () {
         console.log(err);
     }
 }
+proSchema.methods.addTiers = async function(tier1_name,tier1_price,tier1_details,tier2_name,tier2_price,tier2_details,tier3_name,tier3_price,tier3_details){
+    try {
+        this.tiers = {tier1_name,tier1_price,tier1_details,tier2_name,tier2_price,tier2_details,tier3_name,tier3_price,tier3_details};
+        await this.save();
+        return this.tiers;
+   
+    } catch (error) {
+        console.log(error);
+    }
 
+}
 const Professional = mongoose.model("PROFESSIONAL-USER",proSchema);
 module.exports = Professional;

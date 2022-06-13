@@ -81,32 +81,32 @@ function AboutPro() {
                     <div className="pricing-plan">
                         <h2 className="pricing-header">Personal</h2>
                         <ul className="pricing-features">
-                            <li className="pricing-features-item">Custom domains</li>
-                            <li className="pricing-features-item">Sleeps after 30 mins of inactivity</li>
+                            <p className="pricing-features-item">Custom domains</p>
+                            
                         </ul>
-                        <span className="pricing-price">Free</span>
-                        <a href="#/" className="pricing-button">Sign up</a>
+                        <span className="pricing-price">₹1oo</span>
+                        <a href="#/" className="pricing-button">Apply</a>
                     </div>
 
                     <div className="pricing-plan">
                         <h2 className="pricing-header">Small team</h2>
                         <ul className="pricing-features">
-                            <li className="pricing-features-item">Never sleeps</li>
-                            <li className="pricing-features-item">Multiple workers for more powerful apps</li>
+                        <p className="pricing-features-item">Custom domains</p>
+
                         </ul>
                         <span className="pricing-price">₹150</span>
-                        <a href="#/" className="pricing-button is-featured">Free trial</a>
+                        <a href="#/" className="pricing-button is-featured">Apply</a>
                     </div>
 
                     <div className="pricing-plan">
 
                         <h2 className="pricing-header">Enterprise</h2>
                         <ul className="pricing-features">
-                            <li className="pricing-features-item">Dedicated</li>
-                            <li className="pricing-features-item">Simple horizontal scalability</li>
+                        <p className="pricing-features-item">Custom domains</p>
+
                         </ul>
                         <span className="pricing-price">₹400</span>
-                        <a href="#/" className="pricing-button">Free trial</a>
+                        <a href="#/" className="pricing-button">Apply</a>
                     </div>
 
                 </div>

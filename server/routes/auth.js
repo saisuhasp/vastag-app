@@ -6,7 +6,7 @@ const authenticate = require("../middleWare/authenticateCus")
 const authenticatePro = require("../middleWare/authenticatePro")
 require('../db/conn');
 
-const Customer = require("../models/customer.model");
+const Customer = require("../models/customerModel");
 const Professional = require("../models/pro.model");
 
 
@@ -53,9 +53,9 @@ router.post('/signup-customer', async (req, res) => {
         const userExist = await Customer.findOne({ email: email });
 
         if (userExist) {
-            return res.status(422).json({ error: "Email already exist" });
+            return res.status(444).json({ error: "Email already exist" });
         } else if (password != cpassword) {
-            return res.status(422).json({ error: "password are not matching" });
+            return res.status(433).json({ error: "password are not matching" });
         } else {
             const user = new Customer({ name, email, phoneNo, password, cpassword, address, city, state, gender });
             const customerRegister = await user.save();
@@ -188,6 +188,26 @@ router.post('/contact',authenticate,async(req,res)=>{
         console.log(e);
     }
 });
+router.post('/pro',authenticatePro,async(req,res)=>{
+    try {
+        const {tier1_name,tier1_price,tier1_details,tier2_name,tier2_price,tier2_details,tier3_name,tier3_price,tier3_details} = req.body;
+        if(!tier1_name||!tier1_price||!tier1_details||!tier2_name||!tier2_price||!tier2_details||!tier3_name||!tier3_price||!tier3_details){
+            console.log("error in professional tiers form")
+            return res.json({error:"please fill the contact form "});
+        }
+        const userTiers = await Professional.findOne({_id:req.userID});
+        if(userTiers){
+            const userMessage = await userTiers.addTiers(tier1_name,tier1_price,tier1_details,tier2_name,tier2_price,tier2_details,tier3_name,tier3_price,tier3_details);
+            await userTiers.save();
+            res.status(201).json({message:"user message added"})
+        
+        }
+        
+    
+    } catch (error) {
+        console.log(error);
+    }
+})
 router.get('/contact',authenticate,(req,res)=>{
     res.send(req.rootUser);
 });
