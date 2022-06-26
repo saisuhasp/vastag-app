@@ -54,7 +54,11 @@ router.post('/signup-customer', async (req, res) => {
 
         if (userExist) {
             return res.status(444).json({ error: "Email already exist" });
-        } else if (password != cpassword) {
+        }else if(!phoneNo.length === 10){
+            return res.status(411).json({ error: "Invalid Phone number" });
+
+        }
+         else if (password != cpassword) {
             return res.status(433).json({ error: "password are not matching" });
         } else {
             const user = new Customer({ name, email, phoneNo, password, cpassword, address, city, state, gender });
@@ -227,5 +231,16 @@ router.get('/log-out',(req,res)=>{
 
     res.status(200).send('user logout')
 });
-
+router.get('/admin/cusDetails',async(req,res)=>{
+    const data = await Customer.find();
+    res.send(data);
+})
+router.get('/admin/proVerify',async(req,res)=>{
+    const data = await Professional.find();
+    res.send(data);
+})
+router.get('/admin/cusReviews',async(req,res)=>{
+    const data = await Customer.find();
+    res.send(data);
+})
 module.exports = router;

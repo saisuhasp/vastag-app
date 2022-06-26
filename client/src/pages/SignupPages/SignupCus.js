@@ -63,6 +63,10 @@ function SignupCus() {
             window.alert("This email is already existing !");
             console.log("This email is already existing !");
         }
+        else if(res.status===411){
+            window.alert("Entered invalid phone number");
+            console.log("Entered invalid phone number");
+        }
         
         else{
             window.alert(" Registration Successful");
