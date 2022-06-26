@@ -2,8 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../styles/Search.css";
 
-const Card1 = () => (
-    <Link to="/about-pro">
+const Card1 = (props) => {
+var links="/about-pro?id="+ String(props.item._id);
+    return(
+    <Link to={links}>
     <div className="search-card">
 
         <div className="image-card">
@@ -11,14 +13,14 @@ const Card1 = () => (
 
         </div>
         <div className="title-card">
-            <h3>John Joe</h3>
+            <h3>{props.item.name}</h3>
         </div>
         <div className="des-card">
             <p>Ratings : 4.5/5</p>
             {/* <button>Read More...</button> */}
         </div>
     </div>
-    </Link>
-)
+    </Link>)
+    }
 
 export default Card1

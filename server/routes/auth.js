@@ -215,9 +215,9 @@ router.post('/pro',authenticatePro,async(req,res)=>{
 router.get('/contact',authenticate,(req,res)=>{
     res.send(req.rootUser);
 });
-router.get('/search',authenticate,(req,res)=>{
-    res.send(req.rootUser);
-});
+// router.get('/search',authenticate,(req,res)=>{
+//     res.send(req.rootUser);
+// });
 router.get('/about-pro',authenticate,(req,res)=>{
     res.send(req.rootUser);
 });
@@ -243,4 +243,9 @@ router.get('/admin/cusReviews',async(req,res)=>{
     const data = await Customer.find();
     res.send(data);
 })
+router.get('/search',async(req,res)=>{
+    const data = await Professional.find();
+    res.send(data);
+})
+
 module.exports = router;

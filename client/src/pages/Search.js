@@ -1,4 +1,4 @@
-import React,{useEffect} from "react";
+import React,{useEffect,useState} from "react";
 import { Link, } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -8,34 +8,65 @@ import {useNavigate} from "react-router-dom";
 
 
 const Search =()=>{
-    const navigate = useNavigate();
-  const callSearchPage = async()=>{
-    try {
-      const res = await fetch('/search',{
-        method:"GET",
-        headers:{
-           Accept:"application/json",
-           "Content-Type":"application/json",
+  var [userData, setUserData] = useState("");
 
-        },
-        credentials:"include"
-      });
-      const data  = await res.json();
-      console.log(data);
-      if(!res.status === 200){
-        const error = new Error(res.error)
-        throw error;
+  useEffect(()=>{
+  if(userData===""){
+            async function showAdminCus() {
+         
+         try {
+             const res = await  fetch('/search',{
+                 method:"GET",
+                 headers:{
+                     Accept:"application/json",
+                    "Content-Type":"application/json",
+                 },
+                 credentials:"include"
+             })
+            
+             const data = await res.json();
+             setUserData(data)
+ 
+         } catch (error) {
+             console.log(error)
+         }
+     }
+     showAdminCus()
+  }else{
+  //    console.log(userData)
+     // for (let i in userData){
+     //     console.log(userData[i].name)  
+     // }
+     
+  
+  }},[])
+  var arr  = Array()
+  var usersArr  = Array()
+
+
+
+    for(let i  = 0 ;i<userData.length;i++){
+      if("tiers" in userData[i]){
+        
+        for (let j in userData[i].tiers){
+          arr.push(j)
+        }
+        // console.log(arr)
+
+      if(arr.length===9)
+        usersArr.push(userData[i])
       }
-    } catch (error) {
-      console.log(error);
-      navigate("/login-signup");
     }
-  }
-
-  useEffect(() => {
-    callSearchPage();
     
-  }, []);
+    console.log(usersArr)
+    
+
+    const cards = usersArr.map(item=>{
+       return( <Card1
+           key={item._id}
+           item={item}
+       />)
+    })
     return(
         <div>
             <Navbar />
@@ -44,14 +75,7 @@ const Search =()=>{
             </h1>
             <div className="main">
             
-            <Card1 />
-            <Card1 />
-            <Card1 />
-            <Card1 />
-            <Card1 />
-            <Card1 />
-            <Card1 />
-            <Card1 />
+         {cards}
 
             </div>
             <Footer />

@@ -1,68 +1,86 @@
-import React,{useEffect} from "react";
+import React,{useEffect,useState} from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import "../styles/AboutPro.css";
-import {useNavigate} from "react-router-dom";
-
-
+import {useNavigate,useSearchParams} from "react-router-dom";
 
 
 function AboutPro() {
     const navigate = useNavigate();
-  const callAboutProPage = async()=>{
-    try {
-      const res = await fetch('/about-pro',{
-        method:"GET",
-        headers:{
-           Accept:"application/json",
-           "Content-Type":"application/json",
+    const [searchParams, setSearchParams] = useSearchParams();
+    var id=searchParams.get("id");
+    // console.log(searchParams.get("id"))
 
-        },
-        credentials:"include"
-      });
-      const data  = await res.json();
-      console.log(data);
-      if(!res.status === 200){
-        const error = new Error(res.error)
-        throw error;
-      }
-    } catch (error) {
-      console.log(error);
-      navigate("/login-signup");
-    }
-  }
+    var [userData, setUserData] = useState("");
 
-  useEffect(() => {
-    callAboutProPage();
+    useEffect(()=>{
     
-  }, []);
+    if(userData===""){
+              async function showAdminCus() {
+      
+           try {
+               const res = await  fetch('/search',{
+                   method:"GET",
+                   headers:{
+                       Accept:"application/json",
+                      "Content-Type":"application/json",
+                   },
+                   credentials:"include"
+               })
+              
+               const data = await res.json();
+               setUserData(data)
+            //    console.log(userData)
+           } catch (error) {
+               console.log(error)
+           }
+       }
+       showAdminCus()
+    }
+},[])
+    var myData={};
+// console.log(userData)
+for(let i in userData){
+    // console.log(userData[i])
+    if(id === userData[i]._id){
+        myData=userData[i]
+    }
+}
+// console.log(myData);
+if(userData!==""){
     return (
         <div>
             <Navbar />
+        
             <div className="panels-page">
                 <div className="panel">
                 <img src={require('../images/download.png')} className="profile-pic" />
                     <div className="profile-details">
                         <div className="info-box">
                             <p className="info">Full Name : </p>
-                            <p className="info-details">John Joe</p>
+                            <p className="info-details">{myData.name}</p>
                         </div>
 
                         <div className="info-box">
                             <p className="info">Email: </p>
-                            <p className="info-details">johnjoe@gmail.com</p>
+                            <p className="info-details">{myData.email}</p>
                         </div>
                         <div className="info-box">
                             <p className="info">Phone Number : </p>
-                            <p className="info-details">9999999999</p>
+                            <p className="info-details">{myData.phoneNo}</p>
+                        </div>
+                        <div className="info-box">
+                            <p className="info">Address: </p>
+                            <p className="info-details">{myData.address}</p>
                         </div>
                         <div className="info-box">
                             <p className="info">City: </p>
-                            <p className="info-details">Bangalore</p>
+                            <p className="info-details">{myData.city}</p>
                         </div>
+
                         <div className="info-box">
                             <p className="info">State: </p>
-                            <p className="info-details">Karnataka</p>
+                            <p className="info-details">{myData.state}</p>
                         </div>
                         <div className="info-box">
                             <p className="info">Rating: </p>
@@ -70,7 +88,7 @@ function AboutPro() {
                         </div>
                         <div className="info-box">
                             <p className="info">Occupation: </p>
-                            <p className="info-details">Electrian</p>
+                            <p className="info-details">{myData.profession}</p>
                         </div>
                     </div>
 
@@ -79,33 +97,32 @@ function AboutPro() {
 
 
                     <div className="pricing-plan">
-                        <h2 className="pricing-header">Personal</h2>
+                        <h2 className="pricing-header">{myData.tiers.tier1_name}</h2>
                         <ul className="pricing-features">
-                            <p className="pricing-features-item">Custom domains</p>
+                            <p className="pricing-features-item">{myData.tiers.tier1_details}</p>
                             
                         </ul>
-                        <span className="pricing-price">₹1oo</span>
+                        <span className="pricing-price">₹{myData.tiers.tier1_price}</span>
                         <a href="#/" className="pricing-button">Apply</a>
                     </div>
 
                     <div className="pricing-plan">
-                        <h2 className="pricing-header">Small team</h2>
+                        <h2 className="pricing-header">{myData.tiers.tier2_name}</h2>
                         <ul className="pricing-features">
-                        <p className="pricing-features-item">Custom domains</p>
-
+                            <p className="pricing-features-item">{myData.tiers.tier2_details}</p>
+                            
                         </ul>
-                        <span className="pricing-price">₹150</span>
-                        <a href="#/" className="pricing-button is-featured">Apply</a>
+                        <span className="pricing-price">₹{myData.tiers.tier2_price}</span>
+                        <a href="#/" className="pricing-button">Apply</a>
                     </div>
 
                     <div className="pricing-plan">
-
-                        <h2 className="pricing-header">Enterprise</h2>
+                        <h2 className="pricing-header">{myData.tiers.tier3_name}</h2>
                         <ul className="pricing-features">
-                        <p className="pricing-features-item">Custom domains</p>
-
+                            <p className="pricing-features-item">{myData.tiers.tier3_details}</p>
+                            
                         </ul>
-                        <span className="pricing-price">₹400</span>
+                        <span className="pricing-price">₹{myData.tiers.tier3_price}</span>
                         <a href="#/" className="pricing-button">Apply</a>
                     </div>
 
@@ -133,7 +150,7 @@ function AboutPro() {
             <Footer />
         </div>
     )
-
+}
 }
 
 export default AboutPro

@@ -81,13 +81,14 @@ const AdminContact = () => {
        }
        showAdminCus()
     }else{
-       // console.log(userData)
+    //    console.log(userData)
        // for (let i in userData){
        //     console.log(userData[i].name)  
        // }
        
     
     }},[])
+    console.log(userData)
     var arr  = Array()
 
     for(let i  = 0 ;i<userData.length;i++){
