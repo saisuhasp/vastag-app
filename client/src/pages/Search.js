@@ -56,6 +56,7 @@ const Search =()=>{
       if(arr.length===9)
         usersArr.push(userData[i])
       }
+      arr = []
     }
     
     console.log(usersArr)
