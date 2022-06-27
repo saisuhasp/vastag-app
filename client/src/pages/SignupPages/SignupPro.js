@@ -56,7 +56,12 @@ const [data,setstr]=useState()
         window.alert("Invalid Registration");
         console.log("Invalid Registration");
 
-    }else if(res.status === 433){
+    }
+    else if(res.status===411){
+        window.alert("Entered invalid phone number");
+        console.log("Entered invalid phone number");
+    }    
+    else if(res.status === 433){
         window.alert("Password doesnt match please check again");
         console.log("Password doesnt match please check again");
     }

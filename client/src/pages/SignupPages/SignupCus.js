@@ -55,7 +55,12 @@ function SignupCus() {
             window.alert("Invalid Registration");
             console.log("Invalid Registration");
 
-        }else if(res.status === 433){
+        }
+        else if(res.status===411){
+            window.alert("Entered invalid phone number");
+            console.log("Entered invalid phone number");
+        }
+        else if(res.status === 433){
             window.alert("Password doesnt match please check again");
             console.log("Password doesnt match please check again");
         }
@@ -63,10 +68,7 @@ function SignupCus() {
             window.alert("This email is already existing !");
             console.log("This email is already existing !");
         }
-        else if(res.status===411){
-            window.alert("Entered invalid phone number");
-            console.log("Entered invalid phone number");
-        }
+       
         
         else{
             window.alert(" Registration Successful");

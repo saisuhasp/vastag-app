@@ -33,7 +33,7 @@ const ProPricing = () => {
                 tier1_details:userData.tier1_details,
                 tier2_name:userData.tier2_name,
                 tier2_price:userData.tier2_price,
-                tier2_details:userData.tier3_details,
+                tier2_details:userData.tier2_details,
                 tier3_name:userData.tier3_name,
                 tier3_price:userData.tier3_price,
                 tier3_details:userData.tier3_details,

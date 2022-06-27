@@ -53,9 +53,11 @@ router.post('/signup-customer', async (req, res) => {
         const userExist = await Customer.findOne({ email: email });
 
         if (userExist) {
+        console.log(phoneNo.length)
+
             return res.status(444).json({ error: "Email already exist" });
-        }else if(!phoneNo.length === 10){
-            return res.status(411).json({ error: "Invalid Phone number" });
+        }else if(phoneNo.length != 10){
+            return res.status(455).json({ error: "Invalid Phone number" });
 
         }
          else if (password != cpassword) {
@@ -84,7 +86,11 @@ router.post('/signup-pro', async (req, res) => {
 
         if (userExist) {
             return res.status(444).json({ error: "Email already exist" });
-        }else if (password != cpassword) {
+        }else if(!phoneNo.length === 10){
+            return res.status(411).json({ error: "Invalid Phone number" });
+
+        }
+        else if (password != cpassword) {
             return res.status(433).json({ error: "password are not matching" });
         }else{
             const user = new Professional({ name, email, phoneNo, password, cpassword, address, city, state, profession, gender });
