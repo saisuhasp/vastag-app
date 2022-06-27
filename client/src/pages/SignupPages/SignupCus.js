@@ -56,7 +56,7 @@ function SignupCus() {
             console.log("Invalid Registration");
 
         }
-        else if(res.status===411){
+        else if(res.status===455){
             window.alert("Entered invalid phone number");
             console.log("Entered invalid phone number");
         }

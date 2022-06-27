@@ -53,8 +53,6 @@ router.post('/signup-customer', async (req, res) => {
         const userExist = await Customer.findOne({ email: email });
 
         if (userExist) {
-        console.log(phoneNo.length)
-
             return res.status(444).json({ error: "Email already exist" });
         }else if(phoneNo.length != 10){
             return res.status(455).json({ error: "Invalid Phone number" });
@@ -86,8 +84,8 @@ router.post('/signup-pro', async (req, res) => {
 
         if (userExist) {
             return res.status(444).json({ error: "Email already exist" });
-        }else if(!phoneNo.length === 10){
-            return res.status(411).json({ error: "Invalid Phone number" });
+        }else if(phoneNo.length != 10){
+            return res.status(455).json({ error: "Invalid Phone number" });
 
         }
         else if (password != cpassword) {
