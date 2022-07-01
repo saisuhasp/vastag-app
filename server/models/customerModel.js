@@ -42,8 +42,7 @@ const cusSchema = new mongoose.Schema(
             required: true
         },
         date: {
-            type: Date,
-            default: Date.now
+            type: String
         },
         messages: [{
             name: {
@@ -79,6 +78,10 @@ cusSchema.pre('save', async function (next) {
         this.cpassword = await bcrypt.hash(this.cpassword, 12);
 
     }
+    var today = new Date();
+    var date = today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    this.date = date + ' ' + time;
     next();
 });
 

@@ -2,7 +2,7 @@ import React,{useEffect,useState} from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import "../styles/AboutPro.css";
-import {useNavigate,useSearchParams} from "react-router-dom";
+import {useNavigate,useSearchParams,Link} from "react-router-dom";
 
 
 function AboutPro() {
@@ -48,6 +48,9 @@ for(let i in userData){
 }
 // console.log(myData);
 if(userData!==""){
+    
+    var confirmLink="/confirm?id="+ String(myData._id);
+
     return (
         <div>
             <Navbar />
@@ -103,7 +106,8 @@ if(userData!==""){
                             
                         </ul>
                         <span className="pricing-price">₹{myData.tiers.tier1_price}</span>
-                        <a href="#/" className="pricing-button">Apply</a>
+                        
+                        <Link to={confirmLink+String("&tier=1")}><button className="pricing-button">Apply</button></Link>
                     </div>
 
                     <div className="pricing-plan">
@@ -113,7 +117,7 @@ if(userData!==""){
                             
                         </ul>
                         <span className="pricing-price">₹{myData.tiers.tier2_price}</span>
-                        <a href="#/" className="pricing-button">Apply</a>
+                        <Link to={confirmLink+String("&tier=2")}><button className="pricing-button">Apply</button></Link>
                     </div>
 
                     <div className="pricing-plan">
@@ -123,7 +127,7 @@ if(userData!==""){
                             
                         </ul>
                         <span className="pricing-price">₹{myData.tiers.tier3_price}</span>
-                        <a href="#/" className="pricing-button">Apply</a>
+                        <Link to={confirmLink+String("&tier=3")}><button className="pricing-button">Apply</button></Link>
                     </div>
 
                 </div>

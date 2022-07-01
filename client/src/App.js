@@ -15,6 +15,7 @@ import ReviewsPage from "./pages/ReviewsPage";
 import AdminPage from "./pages/AdminPage";
 import ProPage from "./pages/ProPage";
 import Error from './pages/Error';
+import ConfirmPage from './pages/ConfirmPage';
 
 // import NavBar2 from "./components/NavBar2";
 export default function App() {
@@ -34,6 +35,8 @@ export default function App() {
                 <Route path="/reviews" exact element={<ReviewsPage />} />
                 <Route path="/admin" exact element={<AdminPage />} />
                 <Route path="/pro" exact element={<ProPage />} />
+                <Route path="/confirm" exact element={<ConfirmPage />} />
+
                 <Route path="*" exact element={<Error />} />
 
             </Routes>

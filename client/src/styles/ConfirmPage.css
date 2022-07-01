@@ -1,0 +1,83 @@
+.confirm-page{
+    min-height: 100vh;
+    
+    background: #423f3e;
+}
+.confirm-content {
+    
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    
+}
+
+.confirm-heading{
+    margin:  10px;
+    color: white;
+    
+}
+
+
+.panel {
+    margin: 10px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 15px 25px;
+    width: 100%;
+    max-width: 960px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    text-transform: uppercase;
+    align-content:space-around ;
+    justify-content: space-around;
+  }
+  .panel img{
+      width: 200px;
+      height: 200px;
+      
+  }
+  .profile-details{
+    display: flex;
+    text-align: justify;
+    flex-direction: column;
+    text-transform: none;
+    justify-content: center;
+    align-content: space-around;
+    /* margin: auto; */
+  
+  }
+  .info-box{
+    font-size: 20px;
+  }
+
+  .confirm-button {
+    border: 1px solid #888;
+    border-radius: 10px;
+    color: #888;
+    display: inline-block;
+    padding: 15px 35px;
+    text-decoration: none;
+    margin: 5px  40%;
+    margin-bottom: 70px;
+    transition:  200ms ease-in-out;
+    left: 50%;
+    
+  }
+  
+  .confirm-button:hover, .confrim-button:focus {
+    background-color: #888;
+    color: white;
+  }
+  @media (min-width: 900px){
+    .panel {
+      flex-direction: row;
+    }
+   
+    
+  }
+
+  

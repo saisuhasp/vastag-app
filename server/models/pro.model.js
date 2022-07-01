@@ -47,8 +47,7 @@ const proSchema = new mongoose.Schema(
             required: true
         },
         date: {
-            type: Date,
-            default: Date.now
+            type:String
         },
         tiers:{
             tier1_name: {
@@ -91,8 +90,11 @@ proSchema.pre('save', async function(next){
     if(this.isModified('password')){
         this.password = await bcrypt.hash(this.password,12);
         this.cpassword = await bcrypt.hash(this.cpassword,12);
-
     }
+    var today = new Date();
+    var date = today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    this.date = date + ' ' + time;
     next();
 });
 proSchema.methods.generateProAuthToken = async function () {
