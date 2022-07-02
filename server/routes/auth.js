@@ -188,8 +188,10 @@ router.get('/home',authenticate,(req,res)=>{
 router.get('/profile',authenticate,(req,res)=>{
     res.send(req.rootUser);
 });
-router.get('/reviews',authenticate,(req,res)=>{
-    res.send(req.rootUser);
+router.get('/reviews',authenticate,async(req,res)=>{
+    // res.send(req.rootUser);
+    const data = await Transaction.find({"customer.email" : req.rootUser.email})
+    res.send(data)
 });
 router.post('/contact',authenticate,async(req,res)=>{
     try{
@@ -271,6 +273,10 @@ router.get('/search',async(req,res)=>{
     const data = await Professional.find();
     res.send(data);
 })
-
+router.get('/pro/cusNotify',authenticatePro,async(req,res)=>{
+    // res.send(req.rootUser);
+    const data = await Transaction.find({"professional.email" : req.rootUser.email})
+    res.send(data)
+});
 
 module.exports = router;

@@ -5,14 +5,14 @@ import { FloatingLabel } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import './Review.css';
-const Review = () => {
+const Review = (props) => {
     const [show, setShow] = useState(false);
 
 
 return (
     <Card className="review-card">
         <Card.Body>
-            <Card.Title>Roger James</Card.Title>
+            <Card.Title>{props.item.professional.name}</Card.Title>
             <Card.Text>Give us a Review below.</Card.Text>
             <FloatingLabel controlId="floatingTextarea2" label="Review" >
                 <Form.Control

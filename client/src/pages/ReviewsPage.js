@@ -1,4 +1,4 @@
-import React,{useEffect} from "react";
+import React,{useEffect,useState} from "react";
 import "../components/Review.css"
 import Review from "../components/Review";
 import Navbar from "../components/Navbar";
@@ -7,46 +7,63 @@ import {useNavigate} from "react-router-dom";
 
 
 function ReviewsPage(){
-  const navigate = useNavigate();
-  const callReviewsPage = async()=>{
-    try {
-      const res = await fetch('/reviews',{
-        method:"GET",
-        headers:{
-           Accept:"application/json",
-           "Content-Type":"application/json",
+  var [userData, setUserData] = useState("");
 
-        },
-        credentials:"include"
-      });
-      const data  = await res.json();
-      console.log(data);
-      if(!res.status === 200){
-        const error = new Error(res.error)
-        throw error;
-      }
-    } catch (error) {
-      console.log(error);
-      navigate("/login-signup");
-    }
-  }
+    useEffect(()=>{
+    if(userData===""){
+              async function showReviewsPage() {
+           
+           try {
+               const res = await  fetch('/reviews',{
+                   method:"GET",
+                   headers:{
+                       Accept:"application/json",
+                      "Content-Type":"application/json",
+                   },
+                   credentials:"include"
+               })
+              
+               const data = await res.json()
+              //  console.log(data)
+               setUserData(data)
+   
+           } catch (error) {
+               console.log(error)
+           }
+       }
+       showReviewsPage()
+    }else{
+      //  console.log(userData)
+       // for (let i in userData){
+       //     console.log(userData[i].name)  
+       // }
+       
 
-  useEffect(() => {
-    callReviewsPage();
+       
     
-  }, []);
+    }},[])
+    var arr = Array()
+
+    
+       for (let i = 0; i < userData.length; i++) {
+           arr.push(userData[i])
+       }
+      //  console.log(arr)
+   
+   
+       arr.reverse();
+       const reviewCards = arr.map(item=>{
+        return( <Review
+            key={item._id}
+            item={item}
+        />)
+     })
     return(
       <div>
       <Navbar />
       <h4 className="page-heading">Give Your Reviews for the following professionals</h4>
       <div className="reviews-list">
-      <Review />
-      <Review />
-      <Review />
-      <Review />
-      <Review />
-      <Review />
-      <Review />
+      {reviewCards}
 
       </div>
       
