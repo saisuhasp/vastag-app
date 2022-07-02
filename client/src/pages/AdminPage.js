@@ -5,6 +5,7 @@ import {Tabs,Tab} from 'react-bootstrap'
 import AdminCus from '../components/AdminCus';
 import AdminPro from '../components/AdminPro';
 import AdminContact from '../components/AdminContact';
+import Transactions from '../components/Transactions';
 
 function AdminPage() {
   const [click, setClick] = useState(false);
@@ -49,6 +50,9 @@ function AdminPage() {
         </Tab>
         <Tab eventKey="customer-req" title="Customer Requests" >
         <AdminContact />
+        </Tab>
+        <Tab eventKey="customer-trans" title="Transactions" >
+        <Transactions />
         </Tab>
       </Tabs>
     </div>

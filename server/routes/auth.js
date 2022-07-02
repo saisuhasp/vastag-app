@@ -263,6 +263,10 @@ router.get('/admin/cusReviews',async(req,res)=>{
     const data = await Customer.find();
     res.send(data);
 })
+router.get('/admin/transactions',async(req,res)=>{
+    const data = await Transaction.find();
+    res.send(data);
+})
 router.get('/search',async(req,res)=>{
     const data = await Professional.find();
     res.send(data);

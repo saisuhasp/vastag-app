@@ -88,7 +88,6 @@ const AdminContact = () => {
        
     
     }},[])
-    console.log(userData)
     var arr  = Array()
 
     for(let i  = 0 ;i<userData.length;i++){
