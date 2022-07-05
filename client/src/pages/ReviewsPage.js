@@ -46,9 +46,10 @@ function ReviewsPage(){
 
     
        for (let i = 0; i < userData.length; i++) {
+            if(userData[i].review.comment=="")
            arr.push(userData[i])
        }
-      //  console.log(arr)
+       console.log(userData)
    
    
        arr.reverse();

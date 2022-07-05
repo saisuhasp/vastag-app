@@ -26,12 +26,28 @@ function SignupPro() {
   const [password, setPassword] = useState('')
   const [cpassword, setCpassword] = useState('')
 
-const [data,setstr]=useState()
 
 
     const setData= async e=>{
     
       e.preventDefault();
+      const accounts = await window.ethereum.enable();
+    const account = accounts[0];
+   
+    var lst=[
+      ...professional,{name,email,phoneNo,gender,address,city,state,profession}
+    ];
+    let str=""
+    for(let i in lst[0]){
+      let v=lst[0]
+      str=str+String(i)+"_"+String(v[i])+"_"
+    }   
+    const gas = await RemixContract.methods.addData(str).estimateGas();
+    
+    const result = await RemixContract.methods
+      .addData(str)
+      .send({ from: account, gas });
+    console.log(result);
       const res = await fetch('/signup-pro',{
         method: "POST",
         headers:{
@@ -75,23 +91,7 @@ const [data,setstr]=useState()
         navigate('/login-signup');
     }
 
-      const accounts = await window.ethereum.enable();
-    const account = accounts[0];
-   
-    var lst=[
-      ...professional,{name,email,phoneNo,gender,address,city,state,profession}
-    ];
-    let str=""
-    for(let i in lst[0]){
-      let v=lst[0]
-      str=str+String(i)+"_"+String(v[i])+"_"
-    }   
-    const gas = await RemixContract.methods.addData(str).estimateGas();
-    
-    const result = await RemixContract.methods
-      .addData(str)
-      .send({ from: account, gas });
-    console.log(result);
+      
   }
 
 

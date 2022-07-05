@@ -120,7 +120,8 @@ router.post('/login-signup', async (req, res) => {
     // res.json({message:"cool"});
     try {
         let token
-        const { email, password } = req.body;
+        var { email, password } = req.body;
+        email = email.toLowerCase()
 
         if (!email || !password) {
             return res.status(400).json({ error: "Please fill the data" });
@@ -192,6 +193,31 @@ router.get('/reviews',authenticate,async(req,res)=>{
     // res.send(req.rootUser);
     const data = await Transaction.find({"customer.email" : req.rootUser.email})
     res.send(data)
+});
+router.post('/reviews',async(req,res)=>{
+    // res.send(req.rootUser);
+    const reviewText = req.body.reviewText
+    const userReview = await Transaction.findOne({"professional.email":req.body.pro_email , "professional.tier_name":req.body.tier_name});
+    // console.log(userReview);
+    // console.log(req.body);
+
+    if(userReview){
+        const userReviewSent = await userReview.addReview(reviewText);
+            await userReview.save();
+        res.status(201).json({message:"user pro message added"})
+
+    }
+    
+    const userPro = await Professional.findOne({"email":req.body.pro_email});
+    if(userPro){
+        const userProSent = await userPro.addReviews(userReview.customer.name,userReview.customer.email,userReview.customer.phoneNo,reviewText,userReview.professional.tier_name);
+        await userPro.save();
+        // res.status(201).json({message:"user pro message added"})
+
+            
+    }
+
+    
 });
 router.post('/contact',authenticate,async(req,res)=>{
     try{
@@ -277,6 +303,11 @@ router.get('/pro/cusNotify',authenticatePro,async(req,res)=>{
     // res.send(req.rootUser);
     const data = await Transaction.find({"professional.email" : req.rootUser.email})
     res.send(data)
+});
+router.get('/pro/cusReview',authenticatePro,async(req,res)=>{
+    res.send(req.rootUser);
+    // const data = await Profes.find({"professional.email" : req.rootUser.email})
+    
 });
 
 module.exports = router;

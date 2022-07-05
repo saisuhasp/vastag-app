@@ -1,4 +1,4 @@
-import React,{useEffect} from "react";
+import React,{useEffect,useState} from "react";
 import { Link } from "react-router-dom";
 import BannerImage from "../images/background.jpg";
 import "../styles/Home.css";
@@ -13,6 +13,10 @@ import {useNavigate} from "react-router-dom";
 
 function Home() {
     const navigate = useNavigate();
+    const [location, setLocation] = useState('')
+    const [service, setService] = useState('')
+
+    
   const callHomePage = async()=>{
     try {
       const res = await fetch('/home',{
@@ -40,6 +44,8 @@ function Home() {
     callHomePage();
     
   }, []);
+var links="/search?loc="+ String(location).toLowerCase()+"&pro="+String(service).toLowerCase();
+
   return (
     <div>
       <Navbar />
@@ -59,12 +65,20 @@ function Home() {
             label="Enter your Location"
             className="input-boxes"
           >
-            <Form.Control type="text" placeholder="Location" required/>
+            <Form.Control type="text" placeholder="Location" required name="location"
+              value={location}
+                    onChange={(e)=> setLocation(e.target.value)}
+                    
+            />
           </FloatingLabel>
           <FloatingLabel controlId="floatingInput" label="Enter your Service" className="input-boxes">
-            <Form.Control type="text" placeholder="Service" />
+            <Form.Control type="text" placeholder="Service" name="service"
+            value={service}
+                    onChange={(e)=> setService(e.target.value)}
+                    
+             />
           </FloatingLabel>
-          <Link to="/search">
+          <Link to={links}>
           <Button  className="search-button">SERACH</Button>
           </Link>
           </Form>

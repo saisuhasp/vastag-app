@@ -64,3 +64,14 @@
     transition: .5s;
     cursor: pointer;
 }
+.search-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.main2{
+    display: flex;
+    flex-direction:column ;
+    align-items: center;
+}

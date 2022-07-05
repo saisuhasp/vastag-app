@@ -26,12 +26,13 @@ function MyVerticallyCenteredModal(props) {
                     <li>City : {props.item.customer.city} </li>       
                     <li>State : {props.item.customer.state} </li>
                     <li>Tier Type : {props.item.professional.tier_name} </li>
-                    <li>Price : ₹{props.item.professional.tier_price} </li>      
+                    <li>Price : ₹{props.item.professional.tier_price} </li>     
+
                 </ul>
             </Modal.Body>
             <Modal.Footer>
                 <Button onClick={props.onHide}>Close</Button>
-                <Button variant="success">Accept</Button>
+                {/* <Button variant="success">Accept</Button> */}
                 
 
             </Modal.Footer>

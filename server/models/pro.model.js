@@ -77,9 +77,32 @@ const proSchema = new mongoose.Schema(
                 type: String,
                 required: true
             }
+        }],
+        reviews :[{
+            cus_name: {
+                type: String,
+                
+    
+            },
+            cus_email: {
+                type: String,
+    
+            },
+            cus_phoneNo: {
+                type: String,
+    
+            },
+            tier_name:{
+                type:String,
+            },
+            
+            comment:{
+                type : String
+            }
         }]
         
     },
+    
     {
         collection:'professional-users'
     }
@@ -117,6 +140,17 @@ proSchema.methods.addTiers = async function(tier1_name,tier1_price,tier1_details
         console.log(error);
     }
 
+}
+proSchema.methods.addReviews = async function (cus_name,cus_email,cus_phoneNo,comment,tier_name) {
+    try {
+        
+        this.reviews = this.reviews.concat({cus_name:cus_name,cus_email:cus_email,cus_phoneNo:cus_phoneNo,comment:comment,tier_name:tier_name});
+        await this.save();
+        return this.reviews;
+        // console.log(cus_name,cus_email,cus_phoneNo,comment);  
+    } catch (err) {
+        console.log(err);
+    }
 }
 const Professional = mongoose.model("PROFESSIONAL-USER",proSchema);
 module.exports = Professional;

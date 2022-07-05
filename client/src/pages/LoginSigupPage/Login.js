@@ -56,7 +56,7 @@ import {useState} from "react"
                     onChange={(e)=> setPassword(e.target.value)}
                      placeholder="Enter your password" required />
                 </div>
-                <div className="text"><a href="#" style={{color: "#191919"}}>Forgot password?</a></div>
+                {/* <div className="text"><a href="#" style={{color: "#191919"}}>Forgot password?</a></div> */}
                 <div className="button input-box">
                     <input type="submit" value="Log In"
                     onClick={loginUser}

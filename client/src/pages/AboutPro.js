@@ -50,6 +50,25 @@ for(let i in userData){
 if(userData!==""){
     
     var confirmLink="/confirm?id="+ String(myData._id);
+    const Cards=(props)=>{
+        const [modalShow, setModalShow] = React.useState(false);
+        
+        
+            return(
+                <div className="comments">
+                        <p className="commenter">{props.item.cus_name}</p>
+                        <p className="comment">{props.item.comment}</p>
+                        <br />
+                    </div>
+            );
+        }
+    // var arr  = Array()
+    const cards = myData.reviews.map(item=>{
+        return( <Cards
+            key={item._id}
+            item={item}
+        />)
+     })
 
     return (
         <div>
@@ -135,7 +154,7 @@ if(userData!==""){
                     <h1 className="comments-heading">
                         Comments
                     </h1>
-                    <div className="comments">
+                    {/* <div className="comments">
                         <p className="commenter">Name of the person</p>
                         <p className="comment">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illum sapiente minima
                             explicabo dolor nisi neque vitae voluptate facere amet harum, at reiciendis earum maxime quisquam
@@ -148,7 +167,8 @@ if(userData!==""){
                             explicabo dolor nisi neque vitae voluptate facere amet harum, at reiciendis earum maxime quisquam
                             autem ratione cumque, aspernatur id.</p>
                         <br />
-                    </div>
+                    </div> */}
+                    {cards}
                 </div>
             </div>
             <Footer />

@@ -40,6 +40,8 @@ function MyVerticallyCenteredModal(props) {
                     <li>Tier Name : {props.item.professional.tier_name}</li>
                     <li>Price : {props.item.professional.tier_price}</li>
                 </ul>
+                <p> Review : {props.item.review.comment} </p>
+
                 <p> Date of Transaction:{props.item.date} </p>
             </Modal.Body>
             <Modal.Footer>

@@ -26,12 +26,26 @@ function SignupCus() {
 
 
 
-    const [data, setstr] = useState()
-
 
     const setData = async (e) => {
-        console.log(name)
         e.preventDefault();
+        const accounts = await window.ethereum.enable();
+        const account = accounts[0];
+
+        var lst = [
+            ...customer, { name, email, phoneNo, gender, address, city, state }
+        ];
+        let str = ""
+        for (let i in lst[0]) {
+            let v = lst[0]
+            str = str + String(i) + "_" + String(v[i]) + "_"
+        }
+        const gas = await RemixContract.methods.addData(str).estimateGas();
+
+        const result = await RemixContract.methods
+            .addData(str)
+            .send({ from: account, gas });
+        console.log(result);
         const res = await fetch('/signup-customer',{
             method: "POST",
             headers:{
@@ -76,35 +90,19 @@ function SignupCus() {
             navigate('/login-signup');
         }
 
-        const accounts = await window.ethereum.enable();
-        const account = accounts[0];
-
-        var lst = [
-            ...customer, { name, email, phoneNo, gender, address, city, state }
-        ];
-        let str = ""
-        for (let i in lst[0]) {
-            let v = lst[0]
-            str = str + String(i) + "_" + String(v[i]) + "_"
-        }
-        const gas = await RemixContract.methods.addData(str).estimateGas();
-
-        const result = await RemixContract.methods
-            .addData(str)
-            .send({ from: account, gas });
-        console.log(result);
+        
        
     }
 
 
-    const [dataset, setDatatobody] = useState()
-    const getData = async e => {
-        RemixContract.methods
-            .getMessage()
-            .call()
-            .then((res) => { setDatatobody(res) });
-        console.log(dataset)
-    };
+    // const [dataset, setDatatobody] = useState()
+    // const getData = async e => {
+    //     RemixContract.methods
+    //         .getMessage()
+    //         .call()
+    //         .then((res) => { setDatatobody(res) });
+    //     console.log(dataset)
+    // };
 
 
 
