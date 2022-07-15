@@ -29,23 +29,7 @@ function SignupCus() {
 
     const setData = async (e) => {
         e.preventDefault();
-        const accounts = await window.ethereum.enable();
-        const account = accounts[0];
-
-        var lst = [
-            ...customer, { name, email, phoneNo, gender, address, city, state }
-        ];
-        let str = ""
-        for (let i in lst[0]) {
-            let v = lst[0]
-            str = str + String(i) + "_" + String(v[i]) + "_"
-        }
-        const gas = await RemixContract.methods.addData(str).estimateGas();
-
-        const result = await RemixContract.methods
-            .addData(str)
-            .send({ from: account, gas });
-        console.log(result);
+       
         const res = await fetch('/signup-customer',{
             method: "POST",
             headers:{
@@ -82,13 +66,41 @@ function SignupCus() {
             window.alert("This email is already existing !");
             console.log("This email is already existing !");
         }
-       
-        
+        else if(res.status === 466){
+            window.alert("Entered invalid email !");
+            console.log("Entered invalid email!");
+        }
+        else if(res.status === 477){
+            window.alert("Entered invalid state !");
+            console.log("Entered invalid state!");
+        }
+        else if(res.status === 488){
+            window.alert("Entered invalid city or our services are not present in your place !");
+            console.log("Entered invalid city or our services are not present in your place !");
+        }    
         else{
             window.alert(" Registration Successful");
             console.log(" Registration Successful");
+            const accounts = await window.ethereum.enable();
+        const account = accounts[0];
+
+        var lst = [
+            ...customer, { name, email, phoneNo, gender, address, city, state }
+        ];
+        let str = ""
+        for (let i in lst[0]) {
+            let v = lst[0]
+            str = str + String(i) + "_" + String(v[i]) + "_"
+        }
+        const gas = await RemixContract.methods.addData(str).estimateGas();
+
+        const result = await RemixContract.methods
+            .addData(str)
+            .send({ from: account, gas });
+        console.log(result);
             navigate('/login-signup');
         }
+        
 
         
        
@@ -149,7 +161,12 @@ function SignupCus() {
                             </div>
                             <div className="input-box">
                                 <span className="details">Gender</span>
-                                <input type="text" placeholder="Enter your gender" required value={gender} onChange={e => setGender(e.target.value)} />
+                                <select value={gender} onChange={e => setGender(e.target.value)}>
+                                <option>Select Gender</option>
+                                <option>Male</option>
+                                <option>Female</option>
+                                </select>
+                                {/* <input type="text" placeholder="Enter your gender" required value={gender} onChange={e => setGender(e.target.value)} /> */}
                             </div>
 
                         </div>

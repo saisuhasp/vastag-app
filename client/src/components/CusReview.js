@@ -42,7 +42,7 @@ const Cards=(props)=>{
         return(
             <Card>
                 <Card.Body >
-                    <Card.Title>{props.item.cus_name} has chosen your Service</Card.Title>
+                    <Card.Title>{props.item.cus_name} has commented for your work</Card.Title>
                     <Card.Text>Email : {props.item.cus_email}</Card.Text>
                     <Card.Text>Phone Number : {props.item.cus_phoneNo}</Card.Text>
                     <Button variant="primary" onClick={() => setModalShow(true)}>More Information</Button>
