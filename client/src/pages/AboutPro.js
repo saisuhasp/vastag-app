@@ -106,7 +106,7 @@ if(userData!==""){
                         </div>
                         <div className="info-box">
                             <p className="info">Rating: </p>
-                            <p className="info-details">4.5/5</p>
+                            <p className="info-details">{myData.rating}/5</p>
                         </div>
                         <div className="info-box">
                             <p className="info">Occupation: </p>

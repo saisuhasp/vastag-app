@@ -21,7 +21,8 @@ const clicked= async (e)=>{
       body:JSON.stringify({
         reviewText:reviewText,
         pro_email : props.item.professional.email,
-        tier_name :props.item.professional.tier_name
+        tier_name :props.item.professional.tier_name,
+        cus_email : props.item.customer.email,
       })
     });
     const data = res.json();

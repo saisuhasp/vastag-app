@@ -334,6 +334,17 @@ router.post('/login-signup', async (req, res) => {
         console.log(error);
     }
 })
+router.post('/rating', async(req, res) => {
+    var { email, rating } = req.body;
+    // console.log(rating);
+    const userRating = await Professional.findOne({ "email": email });
+        if (userRating) {
+            const userMessage = await userRating.addRating(rating);
+            await userRating.save();
+            res.status(201).json({ message: "user rating added" })
+        }
+
+});
 
 router.get('/home', authenticate, (req, res) => {
     res.send(req.rootUser);
@@ -349,9 +360,10 @@ router.get('/reviews', authenticate, async (req, res) => {
 router.post('/reviews', async (req, res) => {
     // res.send(req.rootUser);
     const reviewText = req.body.reviewText
-    const userReview = await Transaction.findOne({ "professional.email": req.body.pro_email, "professional.tier_name": req.body.tier_name });
+    // console.log(req.body.cus_email);
+    const userReview = await Transaction.findOne({ "professional.email": req.body.pro_email, "professional.tier_name": req.body.tier_name ,"customer.email":req.body.cus_email});
     // console.log(userReview);
-    // console.log(req.body);
+    console.log(req.body);
 
     if (userReview) {
         const userReviewSent = await userReview.addReview(reviewText);
@@ -362,7 +374,10 @@ router.post('/reviews', async (req, res) => {
 
     const userPro = await Professional.findOne({ "email": req.body.pro_email });
     if (userPro) {
+        // console.log(reviewText);
         const userProSent = await userPro.addReviews(userReview.customer.name, userReview.customer.email, userReview.customer.phoneNo, reviewText, userReview.professional.tier_name);
+        // console.log(userPro);
+        // console.log(reviewText);
         await userPro.save();
         // res.status(201).json({message:"user pro message added"})
 

@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require('jsonwebtoken');
+const Rating  =  require('./nlp/Run')
+let result
 
 
 const proSchema = new mongoose.Schema(
@@ -99,7 +101,12 @@ const proSchema = new mongoose.Schema(
             comment:{
                 type : String
             }
-        }]
+        }],
+        rating :{
+            type: String,
+            default:"4"
+        }
+
         
     },
     
@@ -142,14 +149,45 @@ proSchema.methods.addTiers = async function(tier1_name,tier1_price,tier1_details
 
 }
 proSchema.methods.addReviews = async function (cus_name,cus_email,cus_phoneNo,comment,tier_name) {
-    try {
-        
+    try {        
         this.reviews = this.reviews.concat({cus_name:cus_name,cus_email:cus_email,cus_phoneNo:cus_phoneNo,comment:comment,tier_name:tier_name});
         await this.save();
+        var comments = Array();
+        for(let i =0;i<this.reviews.length;i++){
+            comments.push(this.reviews[i].comment)
+        }
+        // console.log(comments);
+       Rating(this.email,comments) 
         return this.reviews;
         // console.log(cus_name,cus_email,cus_phoneNo,comment);  
     } catch (err) {
         console.log(err);
+    }
+}
+proSchema.methods.addRating= async function(rating){
+    try {
+        // console.log(typeof(rating))
+        var values = []
+        for(var i = 1;i<rating.length-1;i++){
+            if(rating[i]!==' '|| rating[i]!==',')
+            values.push(parseInt(rating[i]))
+        }
+        var sum = 0,avg ,count=0
+        for(let i = 0;i<values.length;i+=3){
+
+            // console.log(i,values[i])
+            sum+=values[i]
+            count++
+        }
+        // console.log(sum,count)
+        avg = (sum+4)/(count+1)
+        avg = avg.toFixed(1)
+        this.rating = String(avg)
+        return this.rating;
+
+
+    } catch (error) {
+        console.log(error);
     }
 }
 const Professional = mongoose.model("PROFESSIONAL-USER",proSchema);

@@ -77,7 +77,7 @@ const ConfirmPage = () => {
                     "name": myData.name,
                     "email": myData.email,
                     "phoneNo": myData.phoneNo,
-                    "rating": 4,
+                    "rating": myData.rating,
                     "profession": myData.profession,
                     "tier_name": myData.tiers[`tier${tier}_name`],
                     "tier_price": myData.tiers[`tier${tier}_price`]

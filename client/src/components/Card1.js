@@ -16,7 +16,7 @@ var links="/about-pro?id="+ String(props.item._id);
             <h3>{props.item.name}</h3>
         </div>
         <div className="des-card">
-            <p>Ratings : 4.5/5</p>
+            <p>Ratings : {props.item.rating}/5</p>
             {/* <button>Read More...</button> */}
         </div>
     </div>
