@@ -5,12 +5,12 @@ const jwt = require('jsonwebtoken');
 const authenticate = require("../middleWare/authenticateCus")
 const authenticatePro = require("../middleWare/authenticatePro")
 require('../db/conn');
-
+const fs = require('fs')
 const Customer = require("../models/customerModel");
 const Professional = require("../models/pro.model");
 const Transaction = require("../models/transactionModel")
 
-
+const formidable = require("formidable");
 router.get('/', (req, res) => {
     res.send('Hello world router js');
 });
@@ -424,6 +424,30 @@ router.post('/pro', authenticatePro, async (req, res) => {
         console.log(error);
     }
 })
+router.post('/pro-contact', authenticatePro, async (req, res) => {
+    try {
+        const { name, email, message } = req.body;
+        if (!name || !email || !message) {
+            console.log(("error in contact form"));
+            return res.json({ error: "please fill the contact form " });
+        }
+        const userContact = await Professional.findOne({ _id: req.userID });
+        if (userContact) {
+            const userMessage = await userContact.addMessage(name, email, message);
+            await userContact.save();
+            res.status(201).json({ message: "user message added" })
+
+        }
+    } catch (e) {
+        console.log(e);
+    }
+});
+router.get('/pro-profile', authenticatePro, (req, res) => {
+    res.send(req.rootUser);
+});
+router.get('/pro-contact', authenticatePro, (req, res) => {
+    res.send(req.rootUser);
+});
 router.get('/contact', authenticate, (req, res) => {
     res.send(req.rootUser);
 });
@@ -476,5 +500,72 @@ router.get('/pro/cusReview', authenticatePro, async (req, res) => {
     // const data = await Profes.find({"professional.email" : req.rootUser.email})
 
 });
+
+// router.post("/addFile", async(req,res)=>{
+//     let form = new formidable.IncomingForm();
+//     console.log(form);
+//     form.keepExtension = true; //
+//     form.parse(req, (err, fields, file) => {
+//       if (err) {
+//         res.status(400).json({ Error: "Lookup in the files,problem with image" });
+//       }  
+//     //   let product = new Professional.find();
+//     //   //handle file here
+//     //   //check size of
+//       console.log(file);
+//     //   if (file.file) {
+//     //     if (file.file.size > 10 * 1024 * 1024) {
+//     //       return res.status(400).json({
+//     //         Error: "file size excceeded",
+//     //         Solution: "https://smallpdf.com/compress-pdf",
+//     //       });
+//     //     }
+//     //     if (file.file.type !== "application/pdf") {
+//     //       return res.status(400).json({ Error: "Format must be pdf!" });
+//     //     }
+//     //     product.file.data = fs.readFileSync(file.file.path); //apne aap convert kr le rha hai
+//     //     product.file.contentType = file.file.type;
+//     //   }
+//     //   //save in dB
+//     //   var fileid, names, descriptions;
+//     //   product.save(async (err, product) => {
+//     //     if (err) {
+//     //         console.log(err);
+//     //       return res.status(400).json({ Error: "saving in DB" });
+//     //     }
+        
+  
+        
+//     //     // res.redirect("https://codify-v1.herokuapp.com/getfiles");
+//     //     res.json({
+//     //       message: "UPLOADED",
+//     //     });
+//     //   });
+//     });
+// })
+
+// router.get("/getFile",async(req,res)=>{
+//     try {
+//         console.log(req.body.id);
+//         const pp = await Professional.findById(req.body.id);
+//         console.log(pp);
+//         if (!pp) {
+//           res.status(400).json({
+//             Error: "No file!",
+//           });
+//         }
+//         if (pp.file.data) {
+//           res.set("Content-type", pp.file.contentType);
+    
+//           res.send(pp.file.data);
+//         }
+//       } catch (e) {
+//         res.status(400).json({
+//           Error: "No file for this Id.",
+//         });
+//       }
+
+// })
+
 
 module.exports = router;

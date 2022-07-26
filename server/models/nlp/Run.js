@@ -1,24 +1,4 @@
-// const spawner   = require("child_process").spawn;
-//  async function Test(comment){
-// const data_to_pass_in = comment;
-// console.log("Data sent to the python script is ", data_to_pass_in);
-// const python_process =  spawner('python',['nlp.py',JSON.stringify(data_to_pass_in)],);
-// var out
-// python_process.stdout.on('data',(data)=>{
-//     out  =  JSON.parse(data.toString())
-//     // console.log("Data received from the python script is ",out );
-//     return out
-// })
-// python_process.stdout.on('end',async function(){
-//     console.log('output:',out)
-    
-// });
-// await new Promise(resolve => python_process.on('close',resolve));
-// return(out)
-// }
-// module.exports = Test;
 const {PythonShell}  = require("python-shell")
-// const Professional = require("./pro.model");
 const fetch  = require("node-fetch")
 
 

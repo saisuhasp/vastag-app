@@ -77,7 +77,7 @@ const proSchema = new mongoose.Schema(
         tokens: [{
             token: {
                 type: String,
-                required: true
+                
             }
         }],
         reviews :[{
@@ -102,10 +102,25 @@ const proSchema = new mongoose.Schema(
                 type : String
             }
         }],
+        messages: [{
+            name: {
+                type: String,
+                
+            },
+            email: {
+                type: String,
+            },
+            message: {
+                type: String,
+            }
+        }
+
+        ],
         rating :{
             type: String,
             default:"4"
-        }
+        },
+       
 
         
     },
@@ -188,6 +203,15 @@ proSchema.methods.addRating= async function(rating){
 
     } catch (error) {
         console.log(error);
+    }
+}
+proSchema.methods.addMessage = async function(name,email,message){
+    try{
+        this.messages = this.messages.concat({name,email,message})
+        await this.save();
+        return this.messages;
+    }catch(err){
+        console.log(err);
     }
 }
 const Professional = mongoose.model("PROFESSIONAL-USER",proSchema);

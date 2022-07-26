@@ -32,7 +32,7 @@ return (
         <Card.Body>
             <Card.Title>{props.item.professional.name}</Card.Title>
             <Card.Title>Email: {props.item.professional.email}</Card.Title>
-            <Card.Title>Phone number{props.item.professional.phoneNo}</Card.Title>
+            <Card.Title>Phone number: {props.item.professional.phoneNo}</Card.Title>
 
             <Card.Title>Type :{props.item.professional.tier_name}</Card.Title>
 

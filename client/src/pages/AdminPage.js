@@ -6,6 +6,7 @@ import AdminCus from '../components/AdminCus';
 import AdminPro from '../components/AdminPro';
 import AdminContact from '../components/AdminContact';
 import Transactions from '../components/Transactions';
+import AdminProContact from '../components/AdminProContact';
 
 function AdminPage() {
   const [click, setClick] = useState(false);
@@ -19,7 +20,7 @@ function AdminPage() {
   return (
     <div className='admin-page'>
       <nav className='admin-navbar'>
-        <Link to='/' className='admin-navbar-logo' onClick={closeMobileMenu}>
+        <Link to='/admin' className='admin-navbar-logo' onClick={closeMobileMenu}>
           VASTAG
           <i className='fab fa-firstdraft' />
         </Link>
@@ -50,6 +51,9 @@ function AdminPage() {
         </Tab>
         <Tab eventKey="customer-req" title="Customer Requests" >
         <AdminContact />
+        </Tab>
+        <Tab eventKey="pro-req" title="Professional Requests">
+        <AdminProContact />
         </Tab>
         <Tab eventKey="customer-trans" title="Transactions" >
         <Transactions />

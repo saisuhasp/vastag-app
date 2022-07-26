@@ -16,7 +16,9 @@ import AdminPage from "./pages/AdminPage";
 import ProPage from "./pages/ProPage";
 import Error from './pages/Error';
 import ConfirmPage from './pages/ConfirmPage';
-
+import FilesPage from './pages/FilesPage';
+import ProProfile from './pages/ProProfile';
+import ProContact from './pages/ProContact';
 // import NavBar2 from "./components/NavBar2";
 export default function App() {
     return (
@@ -36,7 +38,9 @@ export default function App() {
                 <Route path="/admin" exact element={<AdminPage />} />
                 <Route path="/pro" exact element={<ProPage />} />
                 <Route path="/confirm" exact element={<ConfirmPage />} />
-
+                <Route path="/addFile" exact element={<FilesPage />} />
+                <Route path="/pro-profile" exact element={<ProProfile />} />
+                <Route path="/pro-contact" exact element={<ProContact />} />
                 <Route path="*" exact element={<Error />} />
 
             </Routes>

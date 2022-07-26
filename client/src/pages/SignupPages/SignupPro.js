@@ -84,6 +84,8 @@ function SignupPro() {
     else{
         window.alert(" Registration Successful");
         console.log(" Registration Successful");
+//   var fileLink="/addFile?email="+ String(email);
+
         const accounts = await window.ethereum.enable();
         const account = accounts[0];
        
@@ -101,7 +103,7 @@ function SignupPro() {
           .addData(str)
           .send({ from: account, gas });
         console.log(result);
-        navigate('/login-signup');
+        navigate("/login-signup");
     }
 
       
